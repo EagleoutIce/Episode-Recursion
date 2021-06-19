@@ -51,9 +51,9 @@ class Mega {
     public String s;
 }
 
-!*\md3*!Mega mon = new Mega();
-!*\md4*!mon.s = "Hallo";
-!*\md5*!mon.s = "Welt";
+!*\md{3-4}*!Mega mon = new Mega();
+!*\md5*!mon.s = "Hallo";
+!*\md6*!mon.s = "Welt";
 \end{plainjava}
 \end{column} \begin{column}{.45\linewidth}
 \resizebox{\linewidth}!{\begin{tikzpicture}
@@ -66,18 +66,18 @@ class Mega {
     }
     \onslide<3->{
         \node[lrel] (mg) at (1.5,5-.85) {\bjava[morekeywords={[3]{Mega}}]{Mega mon =\ }\raisebox{-1pt}{\faGenderless}};
-        \node[lrel2] (mt) at (5,4-.85) {\bjava{int i = 0}\\[1mm]\only<3|handout:0>{\resizebox{25.4mm}!{\bjava{String s = null}}}\only<4->{\bjava{String =\ }\raisebox{-1pt}{\faGenderless}}};
+        \node[lrel2] (mt) at (5,4-.85) {\bjava{int i = 0}\\[1mm]\only<3-4|handout:0>{\resizebox{25.4mm}!{\bjava{String s = null}}}\only<5->{\bjava{String =\ }\raisebox{-1pt}{\faGenderless}}};
         \draw[lightgray,very thick,-Kite]  (mg.east) to[out=0,in=180] (mt.west);
     }
-    \onslide<4->{
-        \node[lrel] (st) at (5,2.75-.85) {\only<4|handout:0>{\bjava{\"Hallo\"}}\only<5->{\bjava[stringstyle={\color{gray}}]{\"Hallo\"}}};
-        \only<4|handout:0>{
+    \onslide<5->{
+        \node[lrel] (st) at (5,2.75-.85) {\only<5|handout:0>{\bjava{\"Hallo\"}}\only<6->{\bjava[stringstyle={\color{gray}}]{\"Hallo\"}}};
+        \only<5|handout:0>{
             \pgfinterruptboundingbox
             \draw[lightgray,very thick,-Kite] ([yshift=5mm]mt.south east) to[out=0,in=0,looseness=1.35] (st.east);
             \endpgfinterruptboundingbox
         }
     }
-    \onslide<5->{
+    \onslide<6->{
         \node[lrel] (st2) at (5,2.75-.85*2) {\bjava{\"Welt\"}};
             \pgfinterruptboundingbox
             \draw[lightgray,very thick,-Kite] ([yshift=5mm]mt.south east) to[out=0,in=0,looseness=1.25] (st2.east);
@@ -88,7 +88,7 @@ class Mega {
 \end{columns}
 \savebox0{\tikz{\pingu[eyes=wink, left wing wave, right wing grab,bow tie=paletteA]}}%
 \begin{tikzpicture}[overlay,remember picture]
-    \onslide<3->{%
+    \onslide<4->{%
         \node[below left=.25cm,yshift=.8cm,scale=.6] (pingu) at (current page.north east) {\rotatebox[origin=c]{180}{\usebox0}};
         \node[left,scale=.6,text width=6.75cm,align=center,yshift=-.33cm] at (pingu.west) {Beachte: Alle Variablen erhalten in Java \say{Default-Werte}. Für komplexe Datentypen ist dies \bjava{null}.};
     }
@@ -179,25 +179,34 @@ class Mega {
 \begin{frame}[fragile]{Stack Frames -- Beispiel}
 \centering\pause%
 \begin{columns}[c]%
-\begin{column}{.5\linewidth}%
+\begin{column}{.475\linewidth}%
 \begin{plainjava}
-!*\md7*!void f(short c) {
-!*\md8*!  int x = 4;
-!*\md{12}*!  System.out.print(!*\mb9*!b(c+4));
+!*\md{10}*!void f(char c) {
+!*\md{11}*!  int x = 4;
+!*\md{15}*!  System.out.print(!*\mb{12}*!b(c+4));
+}
+!*\md5*!!*\md{13}*!String b(int n) {
+!*\md6*!!*\md{14}*!  return "" + (n % 6);
 }
 
-!*\md4*!!*\md{10}*!byte b(int n) {
-!*\md5*!!*\md{11}*!    return (byte) n % 2;
-}
-
-!*\md6*!f(!*\mb3*!b(42));
+!*\md9*!f(!*\mb4*!b(42).!*\rlap{~~\thinspace\mb8}*!charAt(0));
 \end{plainjava}
-\end{column} \begin{column}{.4\linewidth}
-\centering\begin{tikzpicture}[remember picture]
-    \fill[lgray,rounded corners] (0,0) rectangle ++(3,5.5);
+\end{column}\begin{column}{.425\linewidth}
+\resizebox{\linewidth}!{\begin{tikzpicture}[remember picture]
+    \onslide<3->{\fill[lgray,rounded corners] (0,0) rectangle ++(3,5.5);
     \node[ldesc,below] at (1.5,0) {Stack};
-    \node[lrel] at (1.5,5) {\ldots};
-\end{tikzpicture}
+    \node[lrel] (d) at (1.5,5) {\ldots};
+    \fill[lgray,rounded corners] (3.5,0) rectangle ++(3,5.5);
+    \node[ldesc,below] at (5,0) {Heap};
+    \node[lrel] (d2) at (5,5) {\ldots};}
+    \onslide<5->{\node[lsf,below=1mm] (s) at(d.south) {%
+        b
+        \nodepart{second}
+        \bjava{int n = 42}
+    };
+    \draw[ultra thick,lgray] (s.text split west) -- (s.text split east);
+    }
+\end{tikzpicture}}%
 \end{column}
 \end{columns}
 \end{frame}
