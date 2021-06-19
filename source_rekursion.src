@@ -186,7 +186,7 @@ class Mega {
 \begin{plainjava}[escapeinside={!}{!}]
 !\md{11}!void f(char c) {
 !\md*{4}{12}!  int x = 4;
-!\md{17}!  System.out.print(!\mb{13}!b(c+x)!\mh{16}!);!\mh{18}!
+!\md*{6}{17}!  System.out.print(!\mb{13}!b(c+x)!\mh{16}!);!\mh{18}!
 }
 !\md*{2,5}{5,14}!String b(int n) {
 !\md{6-7,15}!  return "" + (n % 9);
@@ -233,7 +233,7 @@ class Mega {
         };
         \draw[ultra thick,lgray] (fs.text split west) -- (fs.text split east);
     }
-    \onslide<12-18|handout:4-5>{%
+    \onslide<12-18|handout:4-6>{%
         \node[lsf,below=1mm] (fs) at (d.south) {%
             \T{f}
             \nodepart{second}
