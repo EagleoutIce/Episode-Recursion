@@ -1,0 +1,92 @@
+\errorcontextlines 999999
+\usepackage[ngerman]{babel}
+
+\usepackage[%
+    sopra-listings={encoding,cpalette,highlights},%
+    sopra-tables, color-palettes={addons},%
+    lecture-bibliography={biber,style=numeric-comp},%
+    util, lithie-boxes={germanenv,koma,overwrite},%
+    lithie-task-boxes={cpalette}, lecture-links={patchurl},%
+    lecture-registers={disable}% would interfere with beamer
+]{lithie-util}
+
+\makeatletter
+\sol@list@define@styles{%
+  {keywordA: \@declaredcolor{sol@colors@lst@keywordA}\bfseries},%
+}
+\makeatother
+
+\RestyleAlgo{plain}
+\lstset{lineskip=5.5pt}
+\lstfs{10}
+
+\DefinePalette{Rekursion}
+{Red,rot: RGB(93, 46, 70)}
+{Magenta,magenta: RGB(22, 105, 122)}
+{Lila,lilafarben: RGB(93, 45, 108)}
+{Blau,bläulich: RGB(21, 150, 90)}
+\SetShadeContrast{45}
+\UsePalette{Rekursion}
+
+\usetheme[libs,nofootfade,centerfoot]{dividing-lines}
+\SetColorProfile*{paletteA}{paletteB}{paletteC}
+
+\usetikzlibrary{arrows.meta,decorations,decorations.pathreplacing,shapes.multipart,tikzmark}
+
+\def\info#1{\bgroup\scriptsize\textcolor{gray}{(#1)}\egroup}
+\SetAllLinkStyle{#1}
+\colorlet{lgray}{lightgray!45!white}
+\tikzset{
+    ldesc/.style={gray,font=\sffamily\sbfamily},
+    lrel/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm,align=center},
+    lrel2/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm*2,align=center},
+    lsf/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm*2,align=center,
+        rectangle split, rectangle split parts=2},
+}
+
+\newcommand\parallelcontent[3][t]{%
+    \begin{columns}[#1]
+    \begin{column}{.475\linewidth}#2\end{column}\hfill
+    \begin{column}{.475\linewidth}#3\end{column}
+    \end{columns}
+}
+
+
+\usepackage[glows]{tikzpingus}
+\usetikzlibrary{decorations.text}
+\hypersetup{colorlinks=false}
+
+\title{Die Liebe zur Rekursion}
+\subtitle{Der Java-Stack, Funktionsaufrufe und Rekursion.\\Ein wiederkehrendes Dilemma.}
+\institute{SP, Universität Ulm}
+
+\author{Florian Sihler}
+\email{florian.sihler@uni-ulm.de}
+
+\date{\today}
+\outro{Ulm, \today}
+\license[]{All Rights reserved}
+
+\def\PreTitlepage{\begingroup%
+\let\oldinserttitle\inserttitle% allow it to be white on second slide
+\let\oldinsertsubtitle\insertsubtitle% allow it to be white on second slide
+\colorlet{PINGU@WHITE}{pingu@white}% hacksies for the whites
+\only<2|handout:2>{\def\inserttitle{\color{pingu@white}\oldinserttitle}\def\insertsubtitle{\textcolor{pingu@white}{\oldinsertsubtitle}}}%
+\onslide<2|handout:2>{%
+\savebox0{\tikz{\pingu[lightsaber left=paletteC!90!white,lightsaber left angle=-20,eyes=shiny,right wing grab,cup=paletteA,body=paletteA!20!black,lightsaber left outer glow factor=.11]}}%
+\begin{tikzpicture}[overlay,remember picture]%
+    % beamer does not support changes of full background easily. so we do hacksies
+    \pgfonlayer{background}
+    \path[fill,black!99] (current page.north west) rectangle (current page.south east);
+    \endpgfonlayer
+    \node[above right=.15cm,scale=.65,xshift=.15cm] (pingu) at(current page.south west) {\usebox0};
+    \node[below right,pingu@white,text width=.6\paperwidth,align=flush left] at(pingu.north east){Officially supported by the Pingu-Foundation for Emotional Support. There will be light and there will be more peeps to come!};
+\end{tikzpicture}}%
+}
+\def\PostTitlepage{\endgroup}
+
+\addbibresource{./references.bib}
+
+
+\newcommand*\md[1]{\only<#1|handout:0>{\llap{\color{shadeA}\textbullet~}}}
+\newcommand*\mb[1]{\only<#1|handout:0>{\rlap{\smash{\raisebox{-.66\baselineskip}{\color{shadeA}\textbullet}}}}}

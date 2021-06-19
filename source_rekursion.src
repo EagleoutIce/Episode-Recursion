@@ -1,0 +1,218 @@
+\input{preamble}
+
+\begin{document}
+
+\section{Java-Stack}
+
+\SidebarCite{book:javase15-std}
+\begin{frame}[fragile]{Javas' Speicherverwaltung}
+\centering\pause%
+\begin{columns}[c]%
+\begin{column}{.45\linewidth}%
+\begin{plainjava}
+!*\md4*!int x = 0;
+!*\md5*!byte y = 12;
+!*\md6*!String f = "Hallo Welt";
+!*\md7*!char[] c = {2, 3, 4};
+\end{plainjava}
+\end{column} \begin{column}{.45\linewidth}
+\resizebox{\linewidth}!{\begin{tikzpicture}
+    \onslide<3->{\fill[lgray,rounded corners] (0,0) rectangle ++(3,5.5);
+    \fill[lgray,rounded corners] (3.5,0) rectangle ++(3,5.5);
+    \node[ldesc,below] at (1.5,0) {Stack};
+    \node[ldesc,below] at (5,0) {Heap};
+    \node[lrel] at (1.5,5) {\ldots};
+    \node[lrel] at (5,5) {\ldots};
+    }
+    \onslide<4->{\node[lrel] at (1.5,5-.85) {\bjava{int x = 0}};}
+    \onslide<5->{\node[lrel] at (1.5,5-.85*2) {\bjava{byte y = 12}};}
+    \onslide<6->{
+        \node[lrel] (fg) at (1.5,5-.85*3) {\bjava{String f =\ }\raisebox{-1pt}\faGenderless};
+        \node[lrel] (ft) at (5,5-.85-.425) {\bjava{\"Hallo Welt\"}};
+        \draw[lightgray,very thick,-Kite]  (fg.east) to[out=0,in=180] (ft.west);
+    }
+    \onslide<7->{
+        \node[lrel] (cg) at (1.5,5-.85*4) {\bjava{char[] c =\ }\raisebox{-1pt}\faGenderless};
+        \node[lrel] (ct) at (5,5-.85*4) {\bjava{\{2, 3, 4\}}};
+        \draw[lightgray,very thick,-Kite]  (cg.east) -- (ct.west);
+    }
+\end{tikzpicture}}
+\end{column}
+\end{columns}
+\end{frame}
+\SidebarCite{gh:tikzpingus}
+\begin{frame}[fragile]{Komplexere Konstrukte}
+\centering\pause%
+\begin{columns}[c]%
+\begin{column}{.45\linewidth}%
+\begin{plainjava}[morekeywords={[3]{Mega}}]
+class Mega {
+    public int i;
+    public String s;
+}
+
+!*\md3*!Mega mon = new Mega();
+!*\md4*!mon.s = "Hallo";
+!*\md5*!mon.s = "Welt";
+\end{plainjava}
+\end{column} \begin{column}{.45\linewidth}
+\resizebox{\linewidth}!{\begin{tikzpicture}
+    \onslide<2->{\fill[lgray,rounded corners] (0,0) rectangle ++(3,5.5);
+    \fill[lgray,rounded corners] (3.5,0) rectangle ++(3,5.5);
+    \node[ldesc,below] at (1.5,0) {Stack};
+    \node[ldesc,below] at (5,0) {Heap};
+    \node[lrel] at (1.5,5) {\ldots};
+    \node[lrel] at (5,5) {\ldots};
+    }
+    \onslide<3->{
+        \node[lrel] (mg) at (1.5,5-.85) {\bjava[morekeywords={[3]{Mega}}]{Mega mon =\ }\raisebox{-1pt}{\faGenderless}};
+        \node[lrel2] (mt) at (5,4-.85) {\bjava{int i = 0}\\[1mm]\only<3|handout:0>{\resizebox{25.4mm}!{\bjava{String s = null}}}\only<4->{\bjava{String =\ }\raisebox{-1pt}{\faGenderless}}};
+        \draw[lightgray,very thick,-Kite]  (mg.east) to[out=0,in=180] (mt.west);
+    }
+    \onslide<4->{
+        \node[lrel] (st) at (5,2.75-.85) {\only<4|handout:0>{\bjava{\"Hallo\"}}\only<5->{\bjava[stringstyle={\color{gray}}]{\"Hallo\"}}};
+        \only<4|handout:0>{
+            \pgfinterruptboundingbox
+            \draw[lightgray,very thick,-Kite] ([yshift=5mm]mt.south east) to[out=0,in=0,looseness=1.35] (st.east);
+            \endpgfinterruptboundingbox
+        }
+    }
+    \onslide<5->{
+        \node[lrel] (st2) at (5,2.75-.85*2) {\bjava{\"Welt\"}};
+            \pgfinterruptboundingbox
+            \draw[lightgray,very thick,-Kite] ([yshift=5mm]mt.south east) to[out=0,in=0,looseness=1.25] (st2.east);
+            \endpgfinterruptboundingbox
+    }
+\end{tikzpicture}}%
+\end{column}
+\end{columns}
+\savebox0{\tikz{\pingu[eyes=wink, left wing wave, right wing grab,bow tie=paletteA]}}%
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<3->{%
+        \node[below left=.25cm,yshift=.8cm,scale=.6] (pingu) at (current page.north east) {\rotatebox[origin=c]{180}{\usebox0}};
+        \node[left,scale=.6,text width=6.75cm,align=center,yshift=-.33cm] at (pingu.west) {Beachte: Alle Variablen erhalten in Java \say{Default-Werte}. Für komplexe Datentypen ist dies \bjava{null}.};
+    }
+\end{tikzpicture}%
+\end{frame}
+\SidebarReset
+
+\section{Funktionsaufrufe}
+\SidebarCite{book:javadoc-stack-frame}
+\begin{frame}{Stack Frames}
+    \vspace*{\baselineskip}
+    \begin{itemize}[<+(1)->]
+        \itemsep=4pt
+        \item Handhaben (lokale) Gültigkeitsbereiche.
+        \item Werden beim Betreten auf dem Stack abgelegt.
+        \item Werden beim Verlassen wieder vom Stack entnommen.\vspace*{\medskipamount}
+    \end{itemize}
+\begin{center}
+    \resizebox*!{2.9cm}{\begin{tikzpicture}[baseline=2.5cm+.4ex]
+        \onslide<5->{
+            \fill[lgray,rounded corners] (0,0) rectangle ++(3.5,5);
+            \node[lrel,minimum width=33mm] (ld) at (1.75,5-.495) {\ldots};
+            \node[lsf,minimum width=33mm,minimum height=28mm,below=1mm] (s) at(ld.south) {%
+                \T{foo}
+                \nodepart{second}
+                \bjava{int i = 12}\\
+                \bjava{char b = 98}
+            };
+            \draw[ultra thick,lgray] (s.text split west) -- (s.text split east);
+            \node[lsf,minimum width=33mm,minimum height=28mm,below=1mm] (d) at (s.south) {%
+                \T{bar}
+                \nodepart{second}
+                \bjava{int i = 23}
+            };
+            \draw[ultra thick,lgray] (d.text split west) -- (d.text split east);
+        }
+    \end{tikzpicture}\onslide<6->{\quad$\Longrightarrow$\quad
+    \begin{tikzpicture}[baseline=2.5cm+.4ex]
+            \fill[lgray,rounded corners] (0,0) rectangle ++(3.5,5);
+            \node[lrel,minimum width=33mm] (ld) at (1.75,5-.495) {\ldots};
+            \node[lsf,minimum width=33mm,minimum height=28mm,below=1mm] (s) at(ld.south) {%
+                \T{foo}
+                \nodepart{second}
+                \bjava{int i = 12}\\
+                \bjava{char b = 98}
+            };
+            \draw[ultra thick,lgray] (s.text split west) -- (s.text split east);
+        \node[below=1mm,ldesc] at(current bounding box.south) {\Large\strut Verlasse bar};
+    \end{tikzpicture}}\onslide<7->{\quad$\Longrightarrow$\quad
+    \begin{tikzpicture}[baseline=2.5cm+.4ex]
+            \fill[lgray,rounded corners] (0,0) rectangle ++(3.5,5);
+            \node[lrel,minimum width=33mm] (ld) at (1.75,5-.495) {\ldots};
+            \node[lsf,minimum width=33mm,minimum height=28mm,below=1mm] (s) at(ld.south) {%
+                \T{foo}
+                \nodepart{second}
+                \bjava{int i = 12}\\
+                \bjava{char b = 98}
+            };
+            \draw[ultra thick,lgray] (s.text split west) -- (s.text split east);
+            \node[lsf,minimum width=33mm,minimum height=28mm,below=1mm] (d) at (s.south) {%
+                \T{far}
+                \nodepart{second}
+                \bjava{char c = 'm'}
+            };
+            \draw[ultra thick,lgray] (d.text split west) -- (d.text split east);
+            \node[below=1mm,ldesc] at(current bounding box.south) {\Large\strut Betrete far};
+    \end{tikzpicture}}\onslide<8->{\quad$\Longrightarrow$\quad
+    \begin{tikzpicture}[baseline=2.5cm+.4ex]
+            \fill[lgray,rounded corners] (0,0) rectangle ++(3.5,5);
+            \node[lrel,minimum width=33mm] (ld) at (1.75,5-.495) {\ldots};
+            \node[lsf,minimum width=33mm,minimum height=28mm,below=1mm] (s) at(ld.south) {%
+                \T{foo}
+                \nodepart{second}
+                \bjava{int i = 12}\\
+                \bjava{char b = 98}
+            };
+            \draw[ultra thick,lgray] (s.text split west) -- (s.text split east);
+            \node[below=1mm,ldesc] at(current bounding box.south) {\Large\strut Verlasse far};
+    \end{tikzpicture}}\onslide<9->{\quad$\Longrightarrow$\quad
+    \begin{tikzpicture}[baseline=2.5cm+.4ex]
+            \fill[lgray,rounded corners] (0,0) rectangle ++(3.5,5);
+            \node[lrel,minimum width=33mm] at (1.75,5-.495) {\ldots};
+            \node[below=1mm,ldesc] at(current bounding box.south) {\Large\strut Verlasse foo};
+    \end{tikzpicture}}}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Stack Frames -- Beispiel}
+\centering\pause%
+\begin{columns}[c]%
+\begin{column}{.5\linewidth}%
+\begin{plainjava}
+!*\md7*!void f(short c) {
+!*\md8*!  int x = 4;
+!*\md{12}*!  System.out.print(!*\mb9*!b(c+4));
+}
+
+!*\md4*!!*\md{10}*!byte b(int n) {
+!*\md5*!!*\md{11}*!    return (byte) n % 2;
+}
+
+!*\md6*!f(!*\mb3*!b(42));
+\end{plainjava}
+\end{column} \begin{column}{.4\linewidth}
+\centering\begin{tikzpicture}[remember picture]
+    \fill[lgray,rounded corners] (0,0) rectangle ++(3,5.5);
+    \node[ldesc,below] at (1.5,0) {Stack};
+    \node[lrel] at (1.5,5) {\ldots};
+\end{tikzpicture}
+\end{column}
+\end{columns}
+\end{frame}
+
+\SidebarReset
+
+
+\section{Theoretisches}
+\begin{frame}
+\end{frame}
+\section{Beispiele}
+\begin{frame}
+\end{frame}
+\section{Abschluss}
+\begin{frame}
+\end{frame}
+
+\end{document}
