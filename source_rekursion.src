@@ -176,22 +176,25 @@ class Mega {
 \end{center}
 \end{frame}
 
+\newsavebox\pinguA \savebox\pinguA{\tikz{\pingu[wings hug,eyes wink,hairs=paletteA!80!white,hair 3=paletteA]}}%
+\newsavebox\pinguB \savebox\pinguB{\tikz{\pingu[glasses round, left wing shock, eyes shock, right wing grab,tie=paletteB]}}%
+\newsavebox\pinguC \savebox\pinguC{\tikz{\pingu[wings wave,right eye wink,halo,small]}}%
 \begin{frame}[fragile]{Stack Frames -- Beispiel}
 \centering\pause%
 \begin{columns}[c]%
-\begin{column}{.475\linewidth}%
-\begin{plainjava}
-!*\md{10}*!void f(char c) {
-!*\md{11}*!  int x = 4;
-!*\md{15}*!  System.out.print(!*\mb{12}*!b(c+4));
+\begin{column}{.5\linewidth}%
+\begin{plainjava}[escapeinside={!}{!}]
+!\md{11}!void f(char c) {
+!\md*{4}{12}!  int x = 4;
+!\md{17}!  System.out.print(!\mb{13}!b(c+x)!\mh{16}!);!\mh{18}!
 }
-!*\md5*!!*\md{13}*!String b(int n) {
-!*\md6*!!*\md{14}*!  return "" + (n % 6);
+!\md*{2,5}{5,14}!String b(int n) {
+!\md{6-7,15}!  return "" + (n % 9);
 }
 
-!*\md9*!f(!*\mb4*!b(42).!*\rlap{~~\thinspace\mb8}*!charAt(0));
+!\md{10}!f(!\mb4!b(42)!\rlap{\!\mb{8}}!.!\rlap{~~\thinspace\mb[3]{9}}!charAt(0));!\mh[7]{19}!
 \end{plainjava}
-\end{column}\begin{column}{.425\linewidth}
+\end{column}\begin{column}{.415\linewidth}
 \resizebox{\linewidth}!{\begin{tikzpicture}[remember picture]
     \onslide<3->{\fill[lgray,rounded corners] (0,0) rectangle ++(3,5.5);
     \node[ldesc,below] at (1.5,0) {Stack};
@@ -199,16 +202,83 @@ class Mega {
     \fill[lgray,rounded corners] (3.5,0) rectangle ++(3,5.5);
     \node[ldesc,below] at (5,0) {Heap};
     \node[lrel] (d2) at (5,5) {\ldots};}
-    \onslide<5->{\node[lsf,below=1mm] (s) at(d.south) {%
-        b
+    \onslide<5-7|handout:2>{\node[lsf,below=1mm] (s) at(d.south) {%
+        \T{b}
         \nodepart{second}
-        \bjava{int n = 42}
+        \bjava{int n = 42}%
     };
     \draw[ultra thick,lgray] (s.text split west) -- (s.text split east);
+    }
+    \onslide<8-9|handout:3>{%
+        \node[lrel,below=1mm] (br) at (d.south) {\bjava{<ret-b> =\ }\raisebox{-1pt}\faGenderless};
+        \node[lrel,below=8mm] (br2) at (d2.south) {\bjava{\"6\"}};
+        \draw[lightgray,very thick,-Kite]  (br.east) to[out=0,in=180] (br2.west);
+    }
+    \onslide<10-|handout:4->{
+        \node[lrel,below=8mm] (br2) at (d2.south) {\bjava[stringstyle={\color{gray}}]{\"6\"}};
+    }
+    \onslide<9|handout:3>{%
+        \node[lsf,below=1mm] (ca) at (br.south) {\resizebox{25.4mm}!{\textit{\color{gray}\bjava{String::charAt}}}\nodepart{second} \scriptsize\textit{omitted}};
+        \draw[ultra thick,lgray] (ca.text split west) -- (ca.text split east);
+        \draw[lightgray,very thick,-Kite]  ([yshift=-3.5mm]ca.east) to[out=0,in=180] (br2.west);
+    }
+    \onslide<10|handout:0>{%
+        \node[lrel,below=1mm] (rca) at (d.south) {\resizebox{25.4mm}!{\bjava{<ret-cA> = '6'}}};
+    }
+    \onslide<11|handout:0>{%
+        \node[lsf,below=1mm] (fs) at (d.south) {%
+            \T{f}
+            \nodepart{second}
+            \bjava{char c = '6'}%
+        };
+        \draw[ultra thick,lgray] (fs.text split west) -- (fs.text split east);
+    }
+    \onslide<12-18|handout:4-5>{%
+        \node[lsf,below=1mm] (fs) at (d.south) {%
+            \T{f}
+            \nodepart{second}
+            \bjava{char c = '6'}\\
+            \bjava{int x = 4}%
+        };
+        \draw[ultra thick,lgray] (fs.text split west) -- (fs.text split east);
+    }
+    \onslide<14-15|handout:5>{%
+        \node[lsf,below=1mm] (bs) at (fs.south) {%
+            \T{b}
+            \nodepart{second}
+            \bjava{char n = 58}
+        };
+        \draw[ultra thick,lgray] (bs.text split west) -- (bs.text split east);
+        \node[above=1mm,scale=.65] (pingu2) at (5,0) {\usebox\pinguA};
+        \node[above=2mm,lrel,draw=gray,minimum width=0mm,minimum height=0mm] at(pingu2.south) {\bjava{'6' = 54}};
+    }
+    \onslide<16|handout:0>{%
+        \node[lrel,below=1mm] (rbs) at (fs.south) {\resizebox{25.4mm}!{\bjava{<ret-b> =\ }\raisebox{-1pt}\faGenderless}};
+        \node[lrel,below=11mm] (br3) at (br2.south) {\bjava{\"4\"}};
+        \draw[lightgray,very thick,-Kite]  (rbs.east) to[out=0,in=180] (br3.west);
+    }
+    \onslide<17|handout:6>{\node[lrel,below=11mm] (br3) at (br2.south) {\bjava{\"4\"}};}
+    \onslide<18-|handout:7->{%
+        \node[lrel,below=11mm] (br3) at (br2.south) {\bjava[stringstyle={\color{gray}}]{\"4\"}};
+    }
+    \onslide<17|handout:6>{%
+        \node[lsf,below=1mm] (print) at (fs.south) {\resizebox{25.4mm}!{\textit{\color{gray}\bjava{PrintStream::print}}}\nodepart{second} \scriptsize\textit{omitted}};
+        \draw[ultra thick,lgray] (print.text split west) -- (print.text split east);
+        \draw[lightgray,very thick,-Kite]  ([yshift=-2.5mm]print.east) to[out=0,in=180] (br3.west);
+    }
+    \onslide<19-|handout:7->{%
+        \node[above=1mm,scale=.65] (pingu3) at (1.5,0) {\usebox\pinguC};
+        \node[above=1mm,lrel,draw=gray,text width=25.3mm,minimum height=0mm,font=\sffamily\tiny] at(pingu3.north) {Die grauen Zeichenketten auf dem Heap können bereits vom Garbage-Collector entfernt worden sein!};
     }
 \end{tikzpicture}}%
 \end{column}
 \end{columns}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<7-|handout:2->{%
+        \node[below left=.25cm,yshift=.8cm,scale=.6] (pingu) at (current page.north east) {\rotatebox[origin=c]{180}{\usebox\pinguB}};
+        \node[left,scale=.6,text width=6.75cm,align=center,yshift=-.33cm] at (pingu.west) {Wir werden Rückgabemechanismen sträflich vereinfachen!};
+    }
+\end{tikzpicture}%
 \end{frame}
 
 \SidebarReset

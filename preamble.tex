@@ -87,6 +87,9 @@
 
 \addbibresource{./references.bib}
 
-
-\newcommand*\md[1]{\only<#1|handout:0>{\llap{\color{shadeA}\textbullet~}}}
-\newcommand*\mb[1]{\only<#1|handout:0>{\rlap{\smash{\raisebox{-.66\baselineskip}{\color{shadeA}\textbullet}}}}}
+\makeatletter
+\newcommand*\md{\@ifstar{\@md}{\@md{0}}}% with star we can set handout state
+\def\@md#1#2{\only<#2|handout:#1>{\llap{\color{shadeA}\textbullet~}}}
+\newcommand*\mb[2][0]{\only<#2|handout:#1>{\rlap{\smash{\raisebox{-.66\baselineskip}{\color{shadeA}\textbullet}}}}}
+\newcommand*\mh[2][0]{\only<#2|handout:#1>{\color{shadeA}\textbullet}}
+\makeatother
