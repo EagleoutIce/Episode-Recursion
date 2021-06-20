@@ -35,6 +35,7 @@
 
 \def\info#1{\bgroup\scriptsize\textcolor{gray}{(#1)}\egroup}
 \SetAllLinkStyle{#1}
+\def\fillfont{\def\mdseries@sf{medium}\sffamily}
 \colorlet{lgray}{lightgray!45!white}
 \tikzset{
     ldesc/.style={gray,font=\sffamily\sbfamily},
@@ -42,6 +43,10 @@
     lrel2/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm*2,align=center},
     lsf/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm*2,align=center,
         rectangle split, rectangle split parts=2},
+    blob/.style={circle,draw, minimum size=1.9em,align=center},
+    lblob/.style={blob,writ,font=\fillfont,#1},%
+    lblob/.default={fill=lgray, draw=lgray},
+    every picture/.append style={line join=round,line cap=round}%
 }
 
 \newcommand\parallelcontent[3][t]{%

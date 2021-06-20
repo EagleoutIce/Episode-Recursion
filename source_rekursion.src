@@ -3,7 +3,6 @@
 \begin{document}
 
 \section{Java-Stack}
-
 \SidebarCite{book:javase15-std}
 \begin{frame}[fragile]{Javas' Speicherverwaltung}
 \centering\pause%
@@ -195,7 +194,7 @@ class Mega {
 !\md{10}!f(!\mb4!b(42)!\rlap{\!\mb{8}}!.!\rlap{~~\thinspace\mb[3]{9}}!charAt(0));!\mh[7]{19}!
 \end{plainjava}
 \end{column}\begin{column}{.415\linewidth}
-\resizebox{\linewidth}!{\begin{tikzpicture}[remember picture]
+\resizebox{\linewidth}!{\begin{tikzpicture}
     \onslide<3->{\fill[lgray,rounded corners] (0,0) rectangle ++(3,5.5);
     \node[ldesc,below] at (1.5,0) {Stack};
     \node[lrel] (d) at (1.5,5) {\ldots};
@@ -280,14 +279,96 @@ class Mega {
     }
 \end{tikzpicture}%
 \end{frame}
-
 \SidebarReset
 
 
 \section{Theoretisches}
-\begin{frame}
+\subsection{Rekursionsvarianten}
+\SidebarCite{dive:recursion}
+\savebox\pinguB{\tikz{\pingu[glasses, left wing wave, eyes angry, right wing grab,silver medal,medal band=paletteA,hat,lollipop left=paletteA]}}%
+\savebox\pinguC{\tikz{\pingu[right wing wave,cane left=brown!80!paletteA!70!black,hand cast right=\paletteA{\faExclamation},tie=paletteC,eyes wink,hair=paletteC]}}
+\begin{frame}[fragile]{Lineare Rekursion}
+    \pause\begin{columns}[c]
+        \begin{column}{.575\linewidth}\lstfs{8}
+\begin{plainjava}[escapeinside={!}{!}]
+!\md{2}!int f(int n) {
+!\md{6}!  if (n <= 0) return n;
+!\md{3}!  else return n + !\mb{4-5}!f(n - 1);!\mh{7-10}!
+}
+\end{plainjava}
+        \end{column} \begin{column}{.375\linewidth}
+\begin{tikzpicture}
+\foreach[remember=\i as \li (initially 0)] \i/\mi/\ri/\xc in {1/3/9/3,2/4/9/3,3/5/8/1,4/6/7/0} {
+    \onslide<\mi->{%
+        \node[lblob,scale=.625] (l\i) at (\i,-\i/3) {\color{black}\resizebox{4.75mm}!{\T{f(\the\numexpr4-\i)}}};
+        \ifnum\li>0 \draw[lgray,thick,Kite-] (l\i) -- (l\li); \fi
+    }
+    \onslide<\ri->{%
+        \ifnum\li>0 \draw[lgray,thick,Kite-] (l\li.60) to[bend left,edge node={node[above right,text=gray] {\footnotesize\xc}}] (l\i.110); \fi
+    }
+}
+\onslide<10->{
+    \node[above left=1.5mm,gray] at (l1) {\footnotesize 6};
+}
+\end{tikzpicture}
+        \end{column}
+    \end{columns}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<11->{\node[above=12mm,scale=.6] (pingu) at(current page.south) {\usebox\pinguC};
+        \node[below right=2mm,align=left,scale=.6,text width=7cm] at(pingu.north east) {%
+            Die einfachste und geläufigste Form der Rekursion.\medskip\\
+            Hier handelt es sich sogar um eine \textit{primitiv-rekursive} Funktion!~\cite{dive:recursion}%
+        };
+    }
+    \onslide<12->{%
+        \node[below left=.25cm,yshift=.8cm,scale=.6] (pingu) at (current page.north east) {\rotatebox[origin=c]{180}{\usebox\pinguB}};
+        \node[left,scale=.6,text width=7.25cm,align=center,yshift=-.33cm] at (pingu.west) {Lineare Rekursion wird weiter unterteilt! So beispielweise in Head- und Tailrekursiv.};
+    }
+\end{tikzpicture}
 \end{frame}
+\SidebarReset
+
+\savebox\pinguB{\tikz{\pingu[eyes wink, crown, crown 3d,wings raise]}}%
+\colorlet{warning}{shadeA}
+\SidebarCite{dive:ackermann}
+\begin{frame}[fragile]{Verschachtelte Rekursion}
+    \pause\begin{columns}[c]
+        \begin{column}{.575\linewidth}\lstfs{8}
+\begin{plainjava}[escapeinside={!}{!}]
+int a(int m, int n) {
+!\md*{2}{6}!  if(m == 0) return n + 1;
+!\md{5}!  else if (n == 0) return a(m - 1, 1);
+!\md{3}!  else return a(m - 1, !\mh{4}!|warn|a(m, n - 1)|warn|)
+}
+\end{plainjava}
+        \end{column} \begin{column}{.375\linewidth}
+\begin{tikzpicture}[lblob/.append style={scale=.825,text=black}]
+\onslide<3->{\node[lblob] (l1) at (0,0) {\resizebox{4.75mm}!{\T{a(1, 1)}}};}
+\onslide<4->{\node[lblob] (l2) at (0,-1) {\resizebox{4.75mm}!{\T{a(1, 0)}}};}
+\onslide<6-|handout:2->{\node[lblob] (l3) at (0,-2) {\resizebox{4.75mm}!{\T{a(0, 1)}}};}
+% TODO: arrows, continue
+
+\end{tikzpicture}
+        \end{column}
+    \end{columns}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<2->{%
+        \node[below left=.25cm,yshift=.8cm,scale=.6] (pingu) at (current page.north east) {\rotatebox[origin=c]{180}{\usebox\pinguB}};
+        \node[left,scale=.6,text width=6.33cm,align=center,yshift=-.33cm] at (pingu.west) {Dies ist die Ackermann Funktion!~\cite{dive:ackermann}};
+    }
+    % TODO: note, dass sie schwer sind!
+\end{tikzpicture}
+\end{frame}
+\SidebarReset
+
+\subsection{Der Grundriss einer Rekursion}
+% Guard und Rekursionsteil
+\subsection{Klassifikation}
+% TODO: HEAD vs. TAIL
+
+
 \section{Beispiele}
+\subsection{...}
 \begin{frame}
 \end{frame}
 \section{Abschluss}
