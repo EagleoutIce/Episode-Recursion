@@ -1,7 +1,6 @@
 \input{preamble}
 
 \begin{document}
-\iffalse
 \section{Java-Stack}
 \SidebarCite{book:javase15-std}
 \begin{frame}[fragile]{Javas' Speicherverwaltung}
@@ -316,6 +315,8 @@ class Mega {
 \end{columns}
 \end{frame}
 
+% TODO: Explaining Folie zu den Graphen und Heap & Stack
+
 \subsection{Rekursionsvarianten}
 \SidebarCite{dive:recursion}
 \savebox\pinguB{\tikz{\pingu[glasses, left wing wave, eyes angry, right wing grab,silver medal,medal band=paletteA,hat,lollipop left=paletteA]}}%
@@ -517,43 +518,73 @@ int b(int x) {
 \end{itemize}
 \end{frame}
 \SidebarReset
-\fi
 
 \subsection{Head- vs. Tail-Rekursion}
-\begin{frame}[fragile]{Head vs. Tail-Rekursion}
+\savebox\pinguA{\tikz{\pingu[right wing grab, sun glasses round=brown!65!black,eyes shiny]}}%
+\savebox\pinguB{\tikz{\pingu[wings shock, sun glasses round=brown!65!black,eyes shiny, eyes angry,devil horns]}}%
+\begin{frame}[fragile]{Head- vs. Tail-Rekursion}
 \pause\lstfs{8}\begin{columns}[c]
         \begin{column}{.425\linewidth}
 \centering
 \begin{plainjava}[escapeinside={!}{!}]
 !\md{3}!void h(int n) {
-    if(n <= 0) return;
-    h(n - 1);
-    System.out.println(n);
+!\md*{1}{7}!    if(n <= 0) return;
+!\md{4-6}!    h(n - 1);
+!\md{8,10,12}!    System.out.println(n);!\mh[2]{9,11,13-14}!
 }
 \end{plainjava}
 \resizebox{.8\linewidth}!{\begin{tikzpicture}[lblob/.append style={text=black,scale=.8},xscale=1.33]
-    \node[lblob] (3) at(0,0) {h(3)};
-    \node[lblob] (2) at(1,0) {h(2)};
-    \node[lblob] (1) at(2,0) {h(1)};
-    \node[lblob] (0) at(3,0) {h(0)};
+    \onslide<3->{\node[lblob] (3) at(0,0) {h(3)};}
+    \onslide<5->{\node[lblob] (2) at(1,0) {h(2)}; \draw[lgray,thick,-Kite] (3) -- (2);}
+    \onslide<6->{\node[lblob] (1) at(2,0) {h(1)};  \draw[lgray,thick,-Kite] (2) -- (1);}
+    \onslide<7->{\node[lblob] (0) at(3,0) {h(0)};  \draw[lgray,thick,-Kite] (1) -- (0);}
+    \onslide<8-|handout:2>{\draw[lgray,thick,-Kite] (0.110) to[bend right] (1.70);}
+    \onslide<9-|handout:2>{\node[below,gray,scale=.8] at(1.south) {1};}
+    \onslide<10-|handout:2>{\draw[lgray,thick,-Kite] (1.110) to[bend right] (2.70);}
+    \onslide<11-|handout:2>{\node[below,gray,scale=.8] at(2.south) {2};}
+    \onslide<12-|handout:2>{\draw[lgray,thick,-Kite] (2.110) to[bend right] (3.70);}
+    \onslide<13-|handout:2>{\node[below,gray,scale=.8] at(3.south) {3};}
+
+    \onslide<14-|handout:2>{
+        \node[below=5mm] at(current bounding box.south) {Ausgabe:  \T{1} \(\to\) \T{2} \(\to\) \T{3}};
+    }
 \end{tikzpicture}}
         \end{column} \begin{column}{.425\linewidth}
 \centering
 \begin{plainjava}[escapeinside={!}{!}]
 !\md{3}!void t(int n) {
-    if(n <= 0) return;
-    System.out.println(n);
-    t(n - 1);
+!\md*{1}{10}!    if(n <= 0) return;
+!\md{4-5,7,9}!    System.out.println(n);
+    !\mb{6,8}!t(n - 1);!\mh[2]{11-14}!
 }
 \end{plainjava}
 \resizebox{.8\linewidth}!{\begin{tikzpicture}[lblob/.append style={text=black,scale=.8},xscale=1.33]
-    \node[lblob] (3) at(0,0) {t(3)};
-    \node[lblob] (2) at(1,0) {t(2)};
-    \node[lblob] (1) at(2,0) {t(1)};
-    \node[lblob] (0) at(3,0) {t(0)};
+    \onslide<3->{\node[lblob] (3) at(0,0) {t(3)};}
+    \onslide<5->{\node[below,gray,scale=.8] at(3.south) {3};}
+    \onslide<6->{\node[lblob] (2) at(1,0) {t(2)}; \draw[lgray,thick,-Kite] (3) -- (2);}
+    \onslide<7->{\node[below,gray,scale=.8] at(2.south) {2};}
+    \onslide<8->{\node[lblob] (1) at(2,0) {t(1)}; \draw[lgray,thick,-Kite] (2) -- (1);}
+    \onslide<9->{\node[below,gray,scale=.8] at(1.south) {1};}
+    \onslide<10->{\node[lblob] (0) at(3,0) {t(0)}; \draw[lgray,thick,-Kite] (1) -- (0);}
+    \onslide<11-|handout:2>{\draw[lgray,thick,-Kite] (0.110) to[bend right] (1.70);}
+    \onslide<12-|handout:2>{\draw[lgray,thick,-Kite] (1.110) to[bend right] (2.70);}
+    \onslide<13-|handout:2>{\draw[lgray,thick,-Kite] (2.110) to[bend right] (3.70);}
+    \onslide<14-|handout:2>{
+        \node[below=5mm] at(current bounding box.south) {Ausgabe: \T{3} \(\to\) \T{2} \(\to\) \T{1}};
+    }
 \end{tikzpicture}}
         \end{column}
     \end{columns}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<15-|handout:2>{%
+        \node[below left=.25cm,yshift=.8cm,scale=.6] (pingu) at (current page.north east) {\rotatebox[origin=c]{180}{\usebox\pinguA}};
+        \node[left,scale=.6,text width=6.75cm,align=center,yshift=-.33cm] at (pingu.west) {Kurzgesagt: Passiert noch etwas im rekursiven Aufstieg oder nicht (tail).};
+    }
+    \onslide<16-|handout:2>{%
+        \node[above right=-.66cm,scale=.6] (pingu) at (current page.south west) {\rotatebox[origin=c]{-45}{\usebox\pinguB}};
+        \node[above=1.5mm,scale=.5,gray,text width=5.5cm,align=center,yshift=-.33cm] at (pingu.north east) {Disclaimer: Die Feinheiten einer Head-Rekursion werden hier vernachlässigt. Tail-Rekursionen sind interessanter, da sie sich problemlos in Iterationen transformieren lassen.};
+    }
+\end{tikzpicture}%
 \end{frame}
 
 \section{Beispiele}
