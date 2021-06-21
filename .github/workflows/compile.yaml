@@ -25,7 +25,7 @@ jobs:
         echo "tx-default" | sltx docker
     - name: Compile the Documents
       run: |
-        sltx compile --root --profile "tx-default" "noanim_rekursion.tex" " rekursion.tex"
+        sltx -t2 compile --root --profile "tx-default" "noanim_rekursion.tex" "rekursion.tex"
         pdftoppm -png -f 1 -l 1 ./noanim_rekursion.pdf preview
     - name: Commit
       run: |
