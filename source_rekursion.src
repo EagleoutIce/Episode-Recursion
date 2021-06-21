@@ -178,7 +178,7 @@ class Mega {
 \savebox\pinguB{\tikz{\pingu[glasses round, left wing shock, eyes shock, right wing grab,tie=paletteB]}}%
 \savebox\pinguC{\tikz{\pingu[wings wave,right eye wink,halo,small]}}%
 \begin{frame}[fragile]{Stack Frames -- Beispiel}
-\centering\pause%
+\centering\pause\vspace*{-1.75em}% space fine tuning
 \begin{columns}[c]%
 \begin{column}{.5\linewidth}%
 \begin{plainjava}[escapeinside={!}{!}]
@@ -192,8 +192,8 @@ class Mega {
 
 !\md{10}!f(!\mb4!b(42)!\rlap{\!\mb{8}}!.!\rlap{~~\thinspace\mb[3]{9}}!charAt(0));!\mh[7]{19}!
 \end{plainjava}
-\end{column}\begin{column}{.415\linewidth}
-\resizebox{\linewidth}!{\begin{tikzpicture}
+\end{column} \begin{column}{.415\linewidth}
+\centering\resizebox{\linewidth}!{\begin{tikzpicture}
     \onslide<3->{\fill[lgray,rounded corners] (0,0) rectangle ++(3,5.5);
     \node[ldesc,below] at (1.5,0) {Stack};
     \node[lrel] (d) at (1.5,5) {\ldots};
@@ -269,6 +269,7 @@ class Mega {
         \node[above=1mm,lrel,draw=gray,text width=25.3mm,minimum height=0mm,font=\sffamily\tiny] at(pingu3.north) {Die grauen Zeichenketten auf dem Heap können bereits vom Garbage-Collector entfernt worden sein!};
     }
 \end{tikzpicture}}%
+\vspace*{-1.25em}%
 \end{column}
 \end{columns}
 \begin{tikzpicture}[overlay,remember picture]
@@ -483,12 +484,12 @@ int a(int m, int n) {
 \resizebox{\linewidth}!{\begin{tikzpicture}[lblob/.append style={text=black,scale=.8},xscale=1.33]
     \onslide<3-|handout:1->{\node[lblob] (0) at(0,0) {\T{f(5)}};}
     \onslide<4-|handout:1->{\node[lblob] (1) at(-1.5,-1.5) {\T{f(4)}}; \draw[lgray,thick,-Kite] (0) -- (1);}
-    \onslide<13-|handout:1->{\node[gray,above left] at(1.north west) {3}; \draw[lgray,thick,-Kite] (1) to[bend left=30] (0);}
+    \onslide<13-|handout:2->{\node[gray,above left] at(1.north west) {3}; \draw[lgray,thick,-Kite] (1) to[bend left=30] (0);}
     \onslide<14-|handout:2->{\node[lblob] (2) at(1.5,-1.5) {\T{f(3)}}; \draw[lgray,thick,-Kite] (0) -- (2);}
 
     \onslide<5-|handout:1->{\node[lblob] (3) at(-2.5,-3) {\T{f(3)}}; \draw[lgray,thick,-Kite] (1) -- (3);}
-    \onslide<11-|handout:1->{\node[lblob] (4) at(-.5,-3) {\T{f(2)}}; \draw[lgray,thick,-Kite] (1) -- (4);}
-    \onslide<12-|handout:1->{\node[gray,below] at(4.south) {1}; \draw[lgray,thick,-Kite] (4) to[bend right=30] (1);}
+    \onslide<11-|handout:2->{\node[lblob] (4) at(-.5,-3) {\T{f(2)}}; \draw[lgray,thick,-Kite] (1) -- (4);}
+    \onslide<12-|handout:2->{\node[gray,below] at(4.south) {1}; \draw[lgray,thick,-Kite] (4) to[bend right=30] (1);}
     \onslide<15-|handout:2->{\node[lblob] (5) at(.5,-3) {\T{f(2)}}; \draw[lgray,thick,-Kite] (2) -- (5);}
     \onslide<16-|handout:2->{\node[gray,below] at(5.south) {1}; \draw[lgray,thick,-Kite] (5) to[bend left=30] (2);}
     \onslide<17-|handout:2->{\node[lblob] (6) at(2.5,-3) {\T{f(1)}}; \draw[lgray,thick,-Kite] (2) -- (6);}
