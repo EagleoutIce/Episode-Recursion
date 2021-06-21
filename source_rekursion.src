@@ -315,6 +315,57 @@ class Mega {
 \end{columns}
 \end{frame}
 
+\begin{frame}[fragile]{Stack Frames und Aufrufgraphen}
+    \begin{itemize}[<+(1)->]
+        \itemsep10pt
+        \item Stack-Frames werden schnell unübersichtlich.
+        \item Wir vereinfachen dies durch Aufrufgraphen.
+        \item Knoten repräsentieren Stack-Frames.\bigskip
+    \end{itemize}
+\begin{columns}[c]
+    \begin{column}{.325\linewidth}\lstfs{9}%
+\begin{plainjava}
+!*\onslide<5->*!int f(int x) {
+!*\onslide<5->*!    return f(x - 1);
+!*\onslide<5->*!}
+\end{plainjava}
+    \end{column} \begin{column}{.2\linewidth}
+\centering
+\onslide<6->{\resizebox{.775\linewidth}!{\begin{tikzpicture}
+    \fill[lgray,rounded corners] (0,-.5) rectangle ++(3.5,5.5);
+    \node[lrel,minimum width=33mm] (ld) at (1.75,5-.495) {\ldots};
+    \node[lsf,minimum width=33mm,minimum height=28mm,below=1mm] (s) at(ld.south) {%
+        \T{f}
+        \nodepart{second}
+        \bjava{int x = 3}
+    };
+    \draw[ultra thick,lgray] (s.text split west) -- (s.text split east);
+    \node[lsf,minimum width=33mm,minimum height=28mm,below=1mm] (d) at (s.south) {%
+        \T{f}
+        \nodepart{second}
+        \bjava{int x = 2}
+    };
+    \draw[ultra thick,lgray] (d.text split west) -- (d.text split east);
+    \node[lsf,minimum width=33mm,minimum height=28mm,below=1mm] (f3) at (d.south) {%
+    \T{f}
+    \nodepart{second}
+    \bjava{int x = 1}
+};
+\draw[ultra thick,lgray] (f3.text split west) -- (f3.text split east);
+\end{tikzpicture}}}
+    \end{column} \begin{column}{.3\linewidth}
+\onslide<7->{%
+\scalebox{0.9}{\begin{tikzpicture}
+    \node[lblob,scale=.75] (0) at(0,0) {\color{black}\T{f(3)}};
+    \node[lblob,scale=.75] (1) at(1,-1) {\color{black}\T{f(2)}};
+    \node[lblob,scale=.75] (2) at(2,-2) {\color{black}\T{f(1)}};
+    \draw[lgray,thick,-Kite] (0) -- (1);
+    \draw[lgray,thick,-Kite] (1) -- (2);
+\end{tikzpicture}}}
+    \end{column}
+\end{columns}
+\end{frame}
+
 % TODO: Explaining Folie zu den Graphen und Heap & Stack
 
 \subsection{Rekursionsvarianten}
@@ -536,8 +587,8 @@ int b(int x) {
 \resizebox{.8\linewidth}!{\begin{tikzpicture}[lblob/.append style={text=black,scale=.8},xscale=1.33]
     \onslide<3->{\node[lblob] (3) at(0,0) {h(3)};}
     \onslide<5->{\node[lblob] (2) at(1,0) {h(2)}; \draw[lgray,thick,-Kite] (3) -- (2);}
-    \onslide<6->{\node[lblob] (1) at(2,0) {h(1)};  \draw[lgray,thick,-Kite] (2) -- (1);}
-    \onslide<7->{\node[lblob] (0) at(3,0) {h(0)};  \draw[lgray,thick,-Kite] (1) -- (0);}
+    \onslide<6->{\node[lblob] (1) at(2,0) {h(1)}; \draw[lgray,thick,-Kite] (2) -- (1);}
+    \onslide<7->{\node[lblob] (0) at(3,0) {h(0)}; \draw[lgray,thick,-Kite] (1) -- (0);}
     \onslide<8-|handout:2>{\draw[lgray,thick,-Kite] (0.110) to[bend right] (1.70);}
     \onslide<9-|handout:2>{\node[below,gray,scale=.8] at(1.south) {1};}
     \onslide<10-|handout:2>{\draw[lgray,thick,-Kite] (1.110) to[bend right] (2.70);}
