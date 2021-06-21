@@ -46,7 +46,11 @@
     blob/.style={circle,draw, minimum size=1.9em,align=center},
     lblob/.style={blob,writ,font=\fillfont,#1},%
     lblob/.default={fill=lgray, draw=lgray},
-    every picture/.append style={line join=round,line cap=round}%
+    every picture/.append style={line join=round,line cap=round},%
+    every node/.append style={font=\sffamily},%
+    lblock/.style={block,writ,font=\fillfont,#1},%
+    lblock/.default={fill=lgray, draw=lgray},
+    block/.style={rectangle,draw, align=center, minimum height=1.25em,rounded corners=1.55pt},%
 }
 
 \newcommand\parallelcontent[3][t]{%
