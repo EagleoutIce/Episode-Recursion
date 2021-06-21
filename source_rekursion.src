@@ -336,23 +336,23 @@ class Mega {
         \begin{column}{.575\linewidth}\lstfs{8}
 \begin{plainjava}[escapeinside={!}{!},moredelim={**[is][{\only<2|handout:0>{\solhlboxd{fill=shadeA}}}]{|mark|}{|mark|}}]
 int a(int m, int n) {
-!\md*{2}{6-7,11}!  if(m == 0) return n + 1;
+!\md*{1}{6-7,11}!  if(m == 0) return n + 1;
 !\md{5}!  else if (n == 0) return a(m - 1, 1);!\mh{8}!
-!\md{3}!  else return !\mb[3]{10}!a(m - 1, !\mb{4}!|mark|a(m, n - 1)|mark|!\mh{9}!)
+!\md{3}!  else return !\mb[2]{10}!a(m - 1, !\mb{4}!|mark|a(m, n - 1)|mark|!\mh{9}!)
 }
 \end{plainjava}
         \end{column} \begin{column}{.375\linewidth}
 \begin{tikzpicture}[lblock/.append style={text=black,scale=.8},baseline=-3cm]
-\onslide<3-|handout:2->{\node[lblock] (l1) at (0,0) {\T{a(1, 1)}};}
-\onslide<4-|handout:2->{\node[lblock] (l2) at (0,-1) {\T{a(1, 0)}}; \draw[lgray,thick,-Kite] (l1) -- (l2);}
-\onslide<6-|handout:2->{\node[lblock] (l3) at (0,-2) {\T{a(0, 1)}}; \draw[lgray,thick,-Kite] (l2) -- (l3);}
-\onslide<7-|handout:3->{\node[right,gray,scale=.65] at(l3.east) {2};}
-\onslide<8-|handout:3->{\draw[lgray,thick,-Kite] (l3.west) to[bend left=40] (l2.west); \node[right,gray,scale=.65] at(l2.east) {2};}
-\onslide<9-|handout:3->{\draw[lgray,thick,-Kite] (l2.west) to[bend left=40] (l1.west);}
-\onslide<10-|handout:3->{\node[lblock] (l4) at (2,0) {\T{a(0, 2)}};
+\onslide<3-|handout:1->{\node[lblock] (l1) at (0,0) {\T{a(1, 1)}};}
+\onslide<4-|handout:1->{\node[lblock] (l2) at (0,-1) {\T{a(1, 0)}}; \draw[lgray,thick,-Kite] (l1) -- (l2);}
+\onslide<6-|handout:1->{\node[lblock] (l3) at (0,-2) {\T{a(0, 1)}}; \draw[lgray,thick,-Kite] (l2) -- (l3);}
+\onslide<7-|handout:2->{\node[right,gray,scale=.65] at(l3.east) {2};}
+\onslide<8-|handout:2->{\draw[lgray,thick,-Kite] (l3.west) to[bend left=40] (l2.west); \node[right,gray,scale=.65] at(l2.east) {2};}
+\onslide<9-|handout:2->{\draw[lgray,thick,-Kite] (l2.west) to[bend left=40] (l1.west);}
+\onslide<10-|handout:2->{\node[lblock] (l4) at (2,0) {\T{a(0, 2)}};
 \draw[lgray,thick,-Kite] (l1.east) -- (l4.west);}
-\onslide<11-|handout:4->{\node[right,gray,scale=.65] at(l4.east) {3};}
-\onslide<12-|handout:4->{\draw[lgray,thick,-Kite] (l4.north) to[bend right=32] (l1.north);}
+\onslide<11-|handout:3->{\node[right,gray,scale=.65] at(l4.east) {3};}
+\onslide<12-|handout:3->{\draw[lgray,thick,-Kite] (l4.north) to[bend right=32] (l1.north);}
 \end{tikzpicture}
         \end{column}
     \end{columns}
@@ -361,15 +361,15 @@ int a(int m, int n) {
         \node[below left=.25cm,yshift=.8cm,scale=.6] (pingu) at (current page.north east) {\rotatebox[origin=c]{180}{\usebox\pinguB}};
         \node[left,scale=.6,text width=6.33cm,align=center,yshift=-.33cm] at (pingu.west) {Dies ist die Ackermann Funktion!~\cite{dive:ackermann}};
     }
-    \onslide<13-|handout:4->{%
-        \node[above right,yshift=12mm,scale=.6,text width=30mm,align=right] (pingu2) at(current page.south) {\only<13-14|handout:0>{\usebox\pinguA}\only<15-|handout:4>{\usebox\pinguC}};
+    \onslide<13-|handout:3->{%
+        \node[above right,yshift=12mm,scale=.6,text width=30mm,align=right] (pingu2) at(current page.south) {\only<13-14|handout:0>{\usebox\pinguA}\only<15-|handout:3->{\usebox\pinguC}};
         \node[below right=1mm,yshift=-5mm,align=left,scale=.6,text width=7cm] at(pingu2.north east) {%
             Damit ist \(a(1, 1) = 3\).\medskip\\
             \only<14->{Was ist dann beispielsweise \(a(4, 2)\)?\smallskip\\}
             \only<15->{Nun\ldots\ \(a(4, 2) \approx 2 \cdot 10^{19\,729}\).}
         };
     }
-    \onslide<16-|handout:4->{%
+    \onslide<16-|handout:3->{%
         \node[below left=1mm,yshift=-5mm,align=right,scale=.6,text width=7cm] at(pingu2.north west) {%
             Verschachtelt-Rekursive Funktionen sind meist sehr schwer nachzuvollziehen.
         };
