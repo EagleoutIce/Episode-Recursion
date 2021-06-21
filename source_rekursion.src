@@ -1,6 +1,7 @@
 \input{preamble}
 
 \begin{document}
+\iffalse
 \section{Java-Stack}
 \SidebarCite{book:javase15-std}
 \begin{frame}[fragile]{Javas' Speicherverwaltung}
@@ -174,9 +175,9 @@ class Mega {
 \end{center}
 \end{frame}
 
-\newsavebox\pinguA \savebox\pinguA{\tikz{\pingu[wings hug,eyes wink,hairs=paletteA!80!white,hair 3=paletteA]}}%
-\newsavebox\pinguB \savebox\pinguB{\tikz{\pingu[glasses round, left wing shock, eyes shock, right wing grab,tie=paletteB]}}%
-\newsavebox\pinguC \savebox\pinguC{\tikz{\pingu[wings wave,right eye wink,halo,small]}}%
+\savebox\pinguA{\tikz{\pingu[wings hug,eyes wink,hairs=paletteA!80!white,hair 3=paletteA]}}%
+\savebox\pinguB{\tikz{\pingu[glasses round, left wing shock, eyes shock, right wing grab,tie=paletteB]}}%
+\savebox\pinguC{\tikz{\pingu[wings wave,right eye wink,halo,small]}}%
 \begin{frame}[fragile]{Stack Frames -- Beispiel}
 \centering\pause%
 \begin{columns}[c]%
@@ -281,10 +282,45 @@ class Mega {
 \SidebarReset
 
 \section{Theoretisches}
+\subsection{Der Grundriss einer Rekursion}
+\savebox\pinguA{\tikz{\pingu[eyes wink, wings wave, eye patch left, eye patch right,belly=\Large\faStar,lightsaber left=paletteD,lightsaber left outer glow factor=.055,lightsaber left angle=42,pants=pingu@bronze,pants bands]}}%
+\begin{frame}{Anatomie einer Rekursion}
+\begin{columns}[c]
+\begin{column}{.6\linewidth}\linespread{1.5}\scriptsize%
+\SetKwProg{Fn}{func}{ is}{end}%
+\begin{algorithm}[H]
+\PreCode\StartCode
+\onslide<2->{\Fn{recursive($\langle$problem arguments$\rangle$)}{%
+    \onslide<3->{\uIf{at elemental problem}{
+        \onslide<4->{
+            solve elemental problem\;
+        }
+    }}
+    \onslide<5->{
+        \Else{%
+            \onslide<6->{Split problem into smaller ones\;}
+            \onslide<7->{Try to solve them recursively\;}
+            \onslide<8->{Combine step-solutions to one\;}
+        }
+    }
+}}
+\end{algorithm}
+\end{column} \begin{column}{.35\linewidth}
+\centering\onslide<9->{\begin{tikzpicture}
+    \node[scale=.6] (pingu) at(0,0) {\usebox\pinguA};
+    \node[lblock,above=-7mm,scale=.6,align=center,text width=5cm,fill opacity=.775] at(pingu.north) {%
+        \color{black}Nicht alle müssen genau dieser Struktur folgen. Wir werden dies später genauer betrachten.%
+    };
+\end{tikzpicture}}
+\end{column}
+\end{columns}
+\end{frame}
+
 \subsection{Rekursionsvarianten}
 \SidebarCite{dive:recursion}
 \savebox\pinguB{\tikz{\pingu[glasses, left wing wave, eyes angry, right wing grab,silver medal,medal band=paletteA,hat,lollipop left=paletteA]}}%
 \savebox\pinguC{\tikz{\pingu[right wing wave,cane left=brown!80!paletteA!70!black,hand cast right=\paletteA{\faExclamation},tie=paletteC,eyes wink,hair=paletteC]}}
+\subsubsection{Lineare Rekursion}
 \begin{frame}[fragile]{Lineare Rekursion}
     \pause\begin{columns}[c]
         \begin{column}{.575\linewidth}\lstfs{8}
@@ -326,19 +362,19 @@ class Mega {
 \end{frame}
 \SidebarReset
 
-\savebox\pinguB{\tikz{\pingu[eyes wink, crown, crown 3d,wings raise]}}%
-
-\savebox\pinguA{\tikz{\pingu[left wing wave,glasses,left eye wink,pants=paletteA]}}%
-\savebox\pinguC{\tikz{\pingu[left wing wave,glasses,left eye wink,right wing shock, eyes shock,pants=paletteA]}}%
+\savebox\pinguA{\tikz{\pingu[left wing wave,glasses,left eye wink,pants=paletteA]}}
+\savebox\pinguB{\tikz{\pingu[eyes wink, crown, crown 3d,wings raise]}}
+\savebox\pinguC{\tikz{\pingu[left wing wave,glasses,left eye wink,right wing shock, eyes shock,pants=paletteA]}}
 \SidebarCite{dive:ackermann}
+\subsubsection{Verschachtelte Rekursion}
 \begin{frame}[fragile]{Verschachtelte Rekursion}
     \pause\begin{columns}[c]
         \begin{column}{.575\linewidth}\lstfs{8}
 \begin{plainjava}[escapeinside={!}{!},moredelim={**[is][{\only<2|handout:0>{\solhlboxd{fill=shadeA}}}]{|mark|}{|mark|}}]
 int a(int m, int n) {
-!\md*{1}{6-7,11}!  if(m == 0) return n + 1;
+!\md{6-7,11}!  if(m == 0) return n + 1;
 !\md{5}!  else if (n == 0) return a(m - 1, 1);!\mh{8}!
-!\md{3}!  else return !\mb[2]{10}!a(m - 1, !\mb{4}!|mark|a(m, n - 1)|mark|!\mh{9}!)
+!\md{3}!  else return !\mb[1]{10}!a(m - 1, !\mb{4}!|mark|a(m, n - 1)|mark|!\mh{9}!);
 }
 \end{plainjava}
         \end{column} \begin{column}{.375\linewidth}
@@ -346,13 +382,13 @@ int a(int m, int n) {
 \onslide<3-|handout:1->{\node[lblock] (l1) at (0,0) {\T{a(1, 1)}};}
 \onslide<4-|handout:1->{\node[lblock] (l2) at (0,-1) {\T{a(1, 0)}}; \draw[lgray,thick,-Kite] (l1) -- (l2);}
 \onslide<6-|handout:1->{\node[lblock] (l3) at (0,-2) {\T{a(0, 1)}}; \draw[lgray,thick,-Kite] (l2) -- (l3);}
-\onslide<7-|handout:2->{\node[right,gray,scale=.65] at(l3.east) {2};}
-\onslide<8-|handout:2->{\draw[lgray,thick,-Kite] (l3.west) to[bend left=40] (l2.west); \node[right,gray,scale=.65] at(l2.east) {2};}
-\onslide<9-|handout:2->{\draw[lgray,thick,-Kite] (l2.west) to[bend left=40] (l1.west);}
-\onslide<10-|handout:2->{\node[lblock] (l4) at (2,0) {\T{a(0, 2)}};
+\onslide<7-|handout:1->{\node[right,gray,scale=.65] at(l3.east) {2};}
+\onslide<8-|handout:1->{\draw[lgray,thick,-Kite] (l3.west) to[bend left=40] (l2.west); \node[right,gray,scale=.65] at(l2.east) {2};}
+\onslide<9-|handout:1->{\draw[lgray,thick,-Kite] (l2.west) to[bend left=40] (l1.west);}
+\onslide<10-|handout:1->{\node[lblock] (l4) at (2,0) {\T{a(0, 2)}};
 \draw[lgray,thick,-Kite] (l1.east) -- (l4.west);}
-\onslide<11-|handout:3->{\node[right,gray,scale=.65] at(l4.east) {3};}
-\onslide<12-|handout:3->{\draw[lgray,thick,-Kite] (l4.north) to[bend right=32] (l1.north);}
+\onslide<11-|handout:2->{\node[right,gray,scale=.65] at(l4.east) {3};}
+\onslide<12-|handout:2->{\draw[lgray,thick,-Kite] (l4.north) to[bend right=32] (l1.north);}
 \end{tikzpicture}
         \end{column}
     \end{columns}
@@ -361,15 +397,15 @@ int a(int m, int n) {
         \node[below left=.25cm,yshift=.8cm,scale=.6] (pingu) at (current page.north east) {\rotatebox[origin=c]{180}{\usebox\pinguB}};
         \node[left,scale=.6,text width=6.33cm,align=center,yshift=-.33cm] at (pingu.west) {Dies ist die Ackermann Funktion!};
     }
-    \onslide<13-|handout:3->{%
-        \node[above right,yshift=12mm,scale=.6,text width=30mm,align=right] (pingu2) at(current page.south) {\only<13-14|handout:0>{\usebox\pinguA}\only<15-|handout:3->{\usebox\pinguC}};
+    \onslide<13-|handout:2->{%
+        \node[above right,yshift=12mm,scale=.6,text width=30mm,align=right] (pingu2) at(current page.south) {\only<13-14|handout:0>{\usebox\pinguA}\only<15-|handout:2->{\usebox\pinguC}};
         \node[below right=1mm,yshift=-5mm,align=left,scale=.6,text width=7cm] at(pingu2.north east) {%
             Damit ist \(a(1, 1) = 3\).\medskip\\
             \only<14->{Was ist dann beispielsweise \(a(4, 2)\)?\smallskip\\}
             \only<15->{Nun\ldots\ \(a(4, 2) \approx 2 \cdot 10^{19\,729}\).}
         };
     }
-    \onslide<16-|handout:3->{%
+    \onslide<16-|handout:2->{%
         \node[below left=1mm,yshift=-5mm,align=right,scale=.6,text width=7cm] at(pingu2.north west) {%
             Verschachtelt-Rekursive Funktionen sind meist sehr schwer nachzuvollziehen.
         };
@@ -380,31 +416,33 @@ int a(int m, int n) {
 
 \savebox\pinguA{\tikz{\pingu[crown 2d=pingu@bronze, wings grab, cup=paletteA, right eye wink]}}%
 \savebox\pinguB{\tikz{\pingu[sunglasses, eyes wink, right wing grab, bow tie=paletteA,hairs=paletteD]}}%
+\subsubsection{Kaskadenförmige Rekursion}
+\SidebarCite{dive:fibonacci}
 \begin{frame}[fragile]{Kaskadenförmige Rekursion}
     \pause\begin{columns}[c]
         \begin{column}{.5\linewidth}\lstfs{8}
 \begin{plainjava}[escapeinside={!}{!}]
 !\md{3}!int f(int n) {
 !\md{7,9,12,16,18}!    if(n <= 2) return 1;
-    else return !\mb{4-6,14-15}!f(n - 1) + !\mb[1,2]{8,11,13,17}!f(n - 2);!\mh{10,19-20}!
+    else return !\mb{4-6,14-15}!f(n - 1) + !\mb[1]{8,11,13,17}!f(n - 2);!\mh{10,19-20}!
 }
 \end{plainjava}
         \end{column} \begin{column}{.425\linewidth}
 \resizebox{\linewidth}!{\begin{tikzpicture}[lblob/.append style={text=black,scale=.8},xscale=1.33]
     \onslide<3-|handout:1->{\node[lblob] (0) at(0,0) {\T{f(5)}};}
     \onslide<4-|handout:1->{\node[lblob] (1) at(-1.5,-1.5) {\T{f(4)}}; \draw[lgray,thick,-Kite] (0) -- (1);}
-    \onslide<13-|handout:2->{\node[gray,above left] at(1.north west) {3}; \draw[lgray,thick,-Kite] (1) to[bend left=30] (0);}
-    \onslide<14-|handout:3->{\node[lblob] (2) at(1.5,-1.5) {\T{f(3)}}; \draw[lgray,thick,-Kite] (0) -- (2);}
+    \onslide<13-|handout:1->{\node[gray,above left] at(1.north west) {3}; \draw[lgray,thick,-Kite] (1) to[bend left=30] (0);}
+    \onslide<14-|handout:2->{\node[lblob] (2) at(1.5,-1.5) {\T{f(3)}}; \draw[lgray,thick,-Kite] (0) -- (2);}
 
     \onslide<5-|handout:1->{\node[lblob] (3) at(-2.5,-3) {\T{f(3)}}; \draw[lgray,thick,-Kite] (1) -- (3);}
-    \onslide<11-|handout:2->{\node[lblob] (4) at(-.5,-3) {\T{f(2)}}; \draw[lgray,thick,-Kite] (1) -- (4);}
-    \onslide<12-|handout:2->{\node[gray,below] at(4.south) {1}; \draw[lgray,thick,-Kite] (4) to[bend right=30] (1);}
-    \onslide<15-|handout:3->{\node[lblob] (5) at(.5,-3) {\T{f(2)}}; \draw[lgray,thick,-Kite] (2) -- (5);}
-    \onslide<16-|handout:3->{\node[gray,below] at(5.south) {1}; \draw[lgray,thick,-Kite] (5) to[bend left=30] (2);}
-    \onslide<17-|handout:3->{\node[lblob] (6) at(2.5,-3) {\T{f(1)}}; \draw[lgray,thick,-Kite] (2) -- (6);}
-    \onslide<18-|handout:3->{\node[gray,below] at(6.south) {1}; \draw[lgray,thick,-Kite] (6) to[bend right=30] (2);}
-    \onslide<19-|handout:3->{\node[gray,above right] at(2.north east) {2}; \draw[lgray,thick,-Kite] (2) to[bend right=30] (0);}
-    \onslide<20-|handout:3->{\node[gray,above] at(0.north) {5};}
+    \onslide<11-|handout:1->{\node[lblob] (4) at(-.5,-3) {\T{f(2)}}; \draw[lgray,thick,-Kite] (1) -- (4);}
+    \onslide<12-|handout:1->{\node[gray,below] at(4.south) {1}; \draw[lgray,thick,-Kite] (4) to[bend right=30] (1);}
+    \onslide<15-|handout:2->{\node[lblob] (5) at(.5,-3) {\T{f(2)}}; \draw[lgray,thick,-Kite] (2) -- (5);}
+    \onslide<16-|handout:2->{\node[gray,below] at(5.south) {1}; \draw[lgray,thick,-Kite] (5) to[bend left=30] (2);}
+    \onslide<17-|handout:2->{\node[lblob] (6) at(2.5,-3) {\T{f(1)}}; \draw[lgray,thick,-Kite] (2) -- (6);}
+    \onslide<18-|handout:2->{\node[gray,below] at(6.south) {1}; \draw[lgray,thick,-Kite] (6) to[bend right=30] (2);}
+    \onslide<19-|handout:2->{\node[gray,above right] at(2.north east) {2}; \draw[lgray,thick,-Kite] (2) to[bend right=30] (0);}
+    \onslide<20-|handout:2->{\node[gray,above] at(0.north) {5};}
 
     \onslide<6-|handout:1->{\node[lblob] (7) at(-3,-4.5) {\T{f(2)}}; \draw[lgray,thick,-Kite] (3) -- (7);}
     \onslide<7-|handout:1->{\node[gray,below] at(7.south) {1}; \draw[lgray,thick,-Kite] (7) to[bend left=30] (3);}
@@ -414,19 +452,21 @@ int a(int m, int n) {
 \end{tikzpicture}}
         \end{column}
 \begin{tikzpicture}[overlay,remember picture]
-    \onslide<21-|handout:3>{%
+    \onslide<21-|handout:2>{%
         \node[above=.25cm,yshift=1cm,scale=.6] (pingu) at (current page.south) {\usebox\pinguA};
         \node[left,scale=.6,text width=6.33cm,align=center,yshift=-.33cm] at (pingu.west) {Elegant, aber meist nicht sonderlich effizient.};
     }
-    \onslide<22-|handout:3>{%
+    \onslide<22-|handout:2>{%
         \node[below left=.25cm,yshift=.8cm,scale=.6] (pingu) at (current page.north east) {\rotatebox[origin=c]{180}{\usebox\pinguB}};
         \node[left=-2mm,scale=.6,text width=6.75cm,align=center,yshift=-.33cm] at (pingu.west) {Sie wird manchmal auch \say{verzweigte Rekursion} genannt.};
     }
 \end{tikzpicture}
     \end{columns}
 \end{frame}
+\SidebarReset
 
 \savebox\pinguB{\tikz{\pingu[eyes wink, right wing grab,eye patch left,belly=\Large\faHeart]}}%
+\subsubsection{Wechselseitige Rekursion}
 \begin{frame}[fragile]{Wechselseitige Rekursion}
     \pause\begin{columns}[c]
         \begin{column}{.5\linewidth}\lstfs{8}
@@ -471,18 +511,50 @@ int b(int x) {
 \begin{itemize}[<+(1)->]
     \itemsep13pt
     \item Die gezeigten Beispiele waren möglichst minimal
-    \item Die Varianten können kombiniert werden!\pause{}\par
+    \item Die Varianten können kombiniert werden!\pause{}\smallskip\par
         \faAngleRight\ z.B. eine kaskadenförmige, wechselseitige Rekursion.
     \item Rekursion und Iteration sind meist gleich mächtig.
 \end{itemize}
 \end{frame}
 \SidebarReset
+\fi
 
-\subsection{Der Grundriss einer Rekursion}
-% Guard und Rekursionsteil
 \subsection{Head- vs. Tail-Rekursion}
-% TODO: HEAD vs. TAIL
-
+\begin{frame}[fragile]{Head vs. Tail-Rekursion}
+\pause\lstfs{8}\begin{columns}[c]
+        \begin{column}{.425\linewidth}
+\centering
+\begin{plainjava}[escapeinside={!}{!}]
+!\md{3}!void h(int n) {
+    if(n <= 0) return;
+    h(n - 1);
+    System.out.println(n);
+}
+\end{plainjava}
+\resizebox{.8\linewidth}!{\begin{tikzpicture}[lblob/.append style={text=black,scale=.8},xscale=1.33]
+    \node[lblob] (3) at(0,0) {h(3)};
+    \node[lblob] (2) at(1,0) {h(2)};
+    \node[lblob] (1) at(2,0) {h(1)};
+    \node[lblob] (0) at(3,0) {h(0)};
+\end{tikzpicture}}
+        \end{column} \begin{column}{.425\linewidth}
+\centering
+\begin{plainjava}[escapeinside={!}{!}]
+!\md{3}!void t(int n) {
+    if(n <= 0) return;
+    System.out.println(n);
+    t(n - 1);
+}
+\end{plainjava}
+\resizebox{.8\linewidth}!{\begin{tikzpicture}[lblob/.append style={text=black,scale=.8},xscale=1.33]
+    \node[lblob] (3) at(0,0) {t(3)};
+    \node[lblob] (2) at(1,0) {t(2)};
+    \node[lblob] (1) at(2,0) {t(1)};
+    \node[lblob] (0) at(3,0) {t(0)};
+\end{tikzpicture}}
+        \end{column}
+    \end{columns}
+\end{frame}
 
 \section{Beispiele}
 \subsection{...}
@@ -491,5 +563,7 @@ int b(int x) {
 \section{Abschluss}
 \begin{frame}
 \end{frame}
+
+% TODO: hilbert etc.
 
 \end{document}
