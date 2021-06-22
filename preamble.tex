@@ -60,7 +60,6 @@
     \end{columns}
 }
 
-
 \usepackage[glows]{tikzpingus}
 \usetikzlibrary{decorations.text}
 \hypersetup{colorlinks=false}
@@ -105,3 +104,8 @@
 
 \setcounter{tocdepth}{4}
 \newsavebox\pinguA \newsavebox\pinguB \newsavebox\pinguC
+
+\usepackage[link]{qrcode}
+\outroright{\smash{\raisebox{1.25cm/2}{\qrcode[height=1.25cm]{https://github.com/EagleoutIce/Episode-Recursion}}}\begin{tikzpicture}[remember picture,overlay]
+    \node[above left,btdl@color@white,scale=.475] at (current page.south east) {\href{https://github.com/EagleoutIce/Episode-Recursion}{Slides on GitHub!}};
+\end{tikzpicture}}

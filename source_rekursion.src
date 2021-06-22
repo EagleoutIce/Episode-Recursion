@@ -366,8 +366,6 @@ class Mega {
 \end{columns}
 \end{frame}
 
-% TODO: Explaining Folie zu den Graphen und Heap & Stack
-
 \subsection{Rekursionsvarianten}
 \SidebarCite{dive:recursion}
 \savebox\pinguB{\tikz{\pingu[glasses, left wing wave, eyes angry, right wing grab,silver medal,medal band=paletteA,hat,lollipop left=paletteA]}}%
@@ -572,7 +570,7 @@ int b(int x) {
 
 \subsection{Head- vs. Tail-Rekursion}
 \savebox\pinguA{\tikz{\pingu[right wing grab, sun glasses round=brown!65!black,eyes shiny]}}%
-\savebox\pinguB{\tikz{\pingu[wings shock, sun glasses round=brown!65!black,eyes shiny, eyes angry,devil horns]}}%
+\savebox\pinguB{\tikz{\pingu[wings shock, sun glasses round=brown!65!black, eyes angry,devil horns=paletteA]}}%
 \begin{frame}[fragile]{Head- vs. Tail-Rekursion}
 \pause\lstfs{8}\begin{columns}[c]
         \begin{column}{.425\linewidth}
@@ -639,10 +637,142 @@ int b(int x) {
 \end{frame}
 
 \section{Beispiele}
-\subsection{...}
+\subsection{Mathematische Funktionen}
+\subsubsection{Fakultätsfunktion}
+\savebox\pinguA{\tikz{\pingu[right eye wink,sign post left={\textbf{Note!}},right wing shock,left wing hug]}}%
+\begin{frame}[fragile]{Mathematische Funktionen}
+\begin{itemize}[<+(1)->]
+    \itemsep4pt
+    \item Einige mathematischen Funktionen sind rekursiv definiert.
+    \item Die gegebene Definition lässt sich meist 1:1 übersetzen.
+    \item Sie nimmt bereits einiges des Denkaufwands ab.
+\end{itemize}
+\begin{columns}[c]
+\begin{column}{.425\linewidth}
+\footnotesize\onslide<5->{\begin{align*}
+    f(n) &= \begin{cases}
+        1,\quad & n \leq 1 \\
+        n \cdot \only<5|handout:1>{\text{\hspace*{-2pt}\tikz[baseline=-.45ex]{\node[fill=shadeA,rounded corners=2pt,outer sep=0pt,inner xsep=0pt,inner ysep=1.5pt] {\hspace*{2pt}$f(n - 1)$\hspace*{2pt}};}\hspace*{-2pt}}}\only<6-|handout:0>{f(n - 1)},\quad & n > 1
+    \end{cases}\\[1ex]
+    \color{gray}f_n &\color{gray}:~ \N \to \N, n \mapsto n \cdot \only<5|handout:1>{\text{\hspace*{-2pt}\tikz[baseline=-.45ex]{\node[fill=shadeA!40!white,rounded corners=2pt,outer sep=0pt,inner xsep=0pt,inner ysep=1pt] {\hspace*{2pt}$f_{n - 1}$\hspace*{2pt}};}\hspace*{-2pt}}}\only<6-|handout:0>{f_{n - 1}} \\
+        & \color{gray}f_1 = 1
+\end{align*}}
+\end{column} \begin{column}{.475\linewidth}
+\begin{plainjava}
+!*\onslide<6->*!public int f(int n) {
+!*\onslide<7->*!  if(n <= 1) return 1;
+!*\onslide<8->*!  else return n * f(n - 1);
+!*\onslide<6->*!}
+\end{plainjava}
+\vspace*{1.5em}
+\end{column}
+\end{columns}
+\begin{tikzpicture}[remember picture,overlay]
+    \onslide<9->{%
+        \node[above right=.25cm,yshift=1cm,scale=.6] (pingu) at (current page.south west) {\usebox\pinguA};
+        \node[above=1mm,scale=.6,text width=4.5cm,align=center,font=\footnotesize\sffamily] at(pingu.north) {%
+            \say{Elementarprobleme} sind hier die nicht-rekursiven Fälle: Teile der Folge, welche oft axiomatisch gegeben sind.%
+        };
+    }
+\end{tikzpicture}
+\end{frame}
+
+\subsubsection{Ackermann Function}
+\savebox\pinguA{\tikz{\pingu[wings wave, straw hat,belly=\Large\faCode,sunglasses, glasses opacity=.9]}}%
+\savebox\pinguB{\lstfs{8}%
+\begin{minipage}{5cm}
+\begin{plainjava}^^J
+int f(int n) \{^^J
+{} {} {} {}return phi(n, n, n);^^J
+\}^^J
+^^J
+int alpha(int a, int n) \{^^J
+{} {} {} {}return n <= 1 ? n : a;^^J
+\}^^J
+\end{plainjava}
+\end{minipage}}
+\begin{frame}{Die Ackermann Funktion, Alternativ}
+\centering\begin{align*}
+    \onslide<2->{f(n) &= \phi(n, n, n)}\\[1ex]
+    \onslide<3->{\phi(a, b, 0) &= a + b }\\
+    \onslide<4->{\phi(a, 0, n +1) &= \alpha(a, n)} \\
+    \onslide<5->{\phi(a, b + 1, n + 1) &= \phi(a, \phi(a, b, n + 1), n)} \\[1ex]
+    \onslide<6->{\color{gray} \alpha(a, n) &= \color{gray}\begin{cases}
+        0, \quad &\text{ wenn } n = 0 \\
+        1, \quad &\text{ wenn } n = 1 \\
+        a, \quad &\text{ wenn } n > 1
+    \end{cases}}
+\end{align*}
+\begin{tikzpicture}[remember picture,overlay]
+    \onslide<7->{%
+        \node[above right=.25cm,yshift=1cm,scale=.6] (pingu) at (current page.south west) {\usebox\pinguA};
+        \node[above=1mm,xshift=.85cm,scale=.75,text width=4.5cm,align=left,font=\footnotesize\sffamily] at(pingu.north) {\usebox\pinguB};
+    }
+\end{tikzpicture}
+\end{frame}
+
+\savebox\pinguA{\tikz{\pingu[wings wave, left eye devil=paletteA,right eye wink,large,hat=paletteA]}}%
+\begin{frame}{Die Ackermann Funktion, Alternativ\hfill \textcolor{shadeA}{\textbf{II}}}
+\centering\begin{align*}
+    \onslide<2->{\phi(a, b, 0) &= a + b \\
+    \phi(a, 0, n +1) &= \alpha(a, n) \\
+    \phi(a, b + 1, n + 1) &= \phi(a, \phi(a, b, n + 1), n)}\\[1ex]
+    \onslide<3->{&\Downarrow \\[1ex]
+    \phi(a, b, 0) &= a + b \\
+    \phi(a, 0, n) &= \alpha(a, n - 1) \\
+    \phi(a, b, n) &= \phi(a, \phi(a, b - 1, n), n - 1)}
+\end{align*}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<4->{%
+        \node[above right=-.75cm,scale=.6] (pingu) at (current page.south west) {\rotatebox[origin=c]{-45}{\usebox\pinguA}};
+        \node[above=1mm,scale=.5,text width=5.5cm,align=center,yshift=-.45cm] at (pingu.north east) {Dieser Schritt ist nicht notwendig, vereinfacht aber die Vorstellung bezüglich der vorherigen Folgenglieder.};
+    }
+\end{tikzpicture}%
+\end{frame}
+
+\begin{frame}[c,fragile]{Die Ackermann Funktion, Alternativ\hfill \textcolor{shadeA}{\textbf{III}}}
+\centering
+\begin{plainjava}
+!*\onslide<3->*!int phi(int a, int b, int n) {
+!*\onslide<4->*!    if(n == 0) return a + b;
+!*\onslide<5->*!    else if (b == 0) return alpha(a, n - 1);
+!*\onslide<6->*!    else return phi(a, phi(a, b - 1, n), n - 1);
+!*\onslide<3->*!}
+\end{plainjava}
+\begin{tikzpicture}[remember picture,overlay]
+    \onslide<2->{\node[above left=.5cm,yshift=1,font=\scriptsize\sffamily,gray,text width=5cm] at(current page.south east) {\begin{align*}
+        \phi(a, b, 0) &= a + b \\
+        \phi(a, 0, n) &= \alpha(a, n - 1) \\
+        \phi(a, b, n) &= \phi(a, \phi(a, b - 1, n), n - 1)
+    \end{align*}};}
+
+    \onslide<3->{
+        \node[above right=.5cm,yshift=1cm,xshift=2cm] at (current page.south west) {%
+            \bjava{f(1) = 1}\only<4->{, \bjava{f(2) = 4}}\only<5->{, \bjava{f(3) =\ }\faFlash}
+        };
+    }
+\end{tikzpicture}
+\end{frame}
+\subsection{Rekursive Strukturen}
+\begin{frame}{Rekursive Strukturen}
+    \begin{itemize}[<+(1)->]
+        \item Viele Datenstrukturen lassen sich rekursiv betrachten.\pause\\
+              \faAngleRight\ z.B. ein Baum in dem jeder Knoten Wurzel eines Teilbaumes ist.
+        \item So können wir auch die Operationen rekursiv definieren.
+    \end{itemize}
+\end{frame}
+% Eine Funktion auf Listen und eine auf Bäumen
+\subsection{Weitere Probleme}
+\subsubsection{Sorting}
+\subsubsection{Towers of Hanoi}
+\subsubsection{Sudoku Solver}
 \begin{frame}
+    % Sort structure
+    % Towers of Hanoi
+    % Sudoku Solver
 \end{frame}
 \section{Abschluss}
+% TODO: hinweisen auf Vorteil von tail rekursion
 \begin{frame}
 \end{frame}
 
