@@ -183,14 +183,14 @@ class Mega {
 \begin{column}{.5\linewidth}%
 \begin{plainjava}[escapeinside={!}{!}]
 !\md{11}!void f(char c) {
-!\md*{4}{12}!  int x = 4;
-!\md*{6}{17}!  System.out.print(!\mb{13}!b(c+x)!\mh{16}!);!\mh{18}!
+!\md{12}!  int x = 4;
+!\md*{5}{17}!  System.out.print(!\mb{13}!b(c+x)!\mh{16}!);!\mh{18}!
 }
-!\md*{2,5}{5,14}!String b(int n) {
+!\md*{2,4}{5,14}!String b(int n) {
 !\md{6-7,15}!  return "" + (n % 9);
 }
 
-!\md{10}!f(!\mb4!b(42)!\rlap{\!\mb{8}}!.!\rlap{~~\thinspace\mb[3]{9}}!charAt(0));!\mh[7]{19}!
+!\md{10}!f(!\mb4!b(42)!\rlap{\!\mb{8}}!.!\rlap{~~\thinspace\mb[3]{9}}!charAt(0));!\mh[6]{19}!
 \end{plainjava}
 \end{column} \begin{column}{.415\linewidth}
 \centering\resizebox{\linewidth}!{\begin{tikzpicture}
@@ -231,7 +231,7 @@ class Mega {
         };
         \draw[ultra thick,lgray] (fs.text split west) -- (fs.text split east);
     }
-    \onslide<12-18|handout:4-6>{%
+    \onslide<12-18|handout:4-5>{%
         \node[lsf,below=1mm] (fs) at (d.south) {%
             \T{f}
             \nodepart{second}
@@ -240,7 +240,7 @@ class Mega {
         };
         \draw[ultra thick,lgray] (fs.text split west) -- (fs.text split east);
     }
-    \onslide<14-15|handout:5>{%
+    \onslide<14-15|handout:4>{%
         \node[lsf,below=1mm] (bs) at (fs.south) {%
             \T{b}
             \nodepart{second}
@@ -255,16 +255,16 @@ class Mega {
         \node[lrel,below=11mm] (br3) at (br2.south) {\bjava{\"4\"}};
         \draw[lightgray,very thick,-Kite]  (rbs.east) to[out=0,in=180] (br3.west);
     }
-    \onslide<17|handout:6>{\node[lrel,below=11mm] (br3) at (br2.south) {\bjava{\"4\"}};}
-    \onslide<18-|handout:7->{%
+    \onslide<17|handout:5>{\node[lrel,below=11mm] (br3) at (br2.south) {\bjava{\"4\"}};}
+    \onslide<18-|handout:6->{%
         \node[lrel,below=11mm] (br3) at (br2.south) {\bjava[stringstyle={\color{gray}}]{\"4\"}};
     }
-    \onslide<17|handout:6>{%
+    \onslide<17|handout:5>{%
         \node[lsf,below=1mm] (print) at (fs.south) {\resizebox{25.4mm}!{\textit{\color{gray}\bjava{PrintStream::print}}}\nodepart{second} \scriptsize\textit{omitted}};
         \draw[ultra thick,lgray] (print.text split west) -- (print.text split east);
         \draw[lightgray,very thick,-Kite]  ([yshift=-2.5mm]print.east) to[out=0,in=180] (br3.west);
     }
-    \onslide<19-|handout:7->{%
+    \onslide<19-|handout:6->{%
         \node[above=1mm,scale=.65] (pingu3) at (1.5,0) {\usebox\pinguC};
         \node[above=1mm,lrel,draw=gray,text width=25.3mm,minimum height=0mm,font=\sffamily\tiny] at(pingu3.north) {Die grauen Zeichenketten auf dem Heap können bereits vom Garbage-Collector entfernt worden sein!};
     }
@@ -579,9 +579,9 @@ int b(int x) {
 \centering
 \begin{plainjava}[escapeinside={!}{!}]
 !\md{3}!void h(int n) {
-!\md*{1}{7}!    if(n <= 0) return;
+!\md{7}!    if(n <= 0) return;
 !\md{4-6}!    h(n - 1);
-!\md{8,10,12}!    System.out.println(n);!\mh[2]{9,11,13-14}!
+!\md{8,10,12}!    System.out.println(n);!\mh[1]{9,11,13-14}!
 }
 \end{plainjava}
 \resizebox{.8\linewidth}!{\begin{tikzpicture}[lblob/.append style={text=black,scale=.8},xscale=1.33]
@@ -589,14 +589,14 @@ int b(int x) {
     \onslide<5->{\node[lblob] (2) at(1,0) {h(2)}; \draw[lgray,thick,-Kite] (3) -- (2);}
     \onslide<6->{\node[lblob] (1) at(2,0) {h(1)}; \draw[lgray,thick,-Kite] (2) -- (1);}
     \onslide<7->{\node[lblob] (0) at(3,0) {h(0)}; \draw[lgray,thick,-Kite] (1) -- (0);}
-    \onslide<8-|handout:2>{\draw[lgray,thick,-Kite] (0.110) to[bend right] (1.70);}
-    \onslide<9-|handout:2>{\node[below,gray,scale=.8] at(1.south) {1};}
-    \onslide<10-|handout:2>{\draw[lgray,thick,-Kite] (1.110) to[bend right] (2.70);}
-    \onslide<11-|handout:2>{\node[below,gray,scale=.8] at(2.south) {2};}
-    \onslide<12-|handout:2>{\draw[lgray,thick,-Kite] (2.110) to[bend right] (3.70);}
-    \onslide<13-|handout:2>{\node[below,gray,scale=.8] at(3.south) {3};}
+    \onslide<8-|handout:1>{\draw[lgray,thick,-Kite] (0.110) to[bend right] (1.70);}
+    \onslide<9-|handout:1>{\node[below,gray,scale=.8] at(1.south) {1};}
+    \onslide<10-|handout:1>{\draw[lgray,thick,-Kite] (1.110) to[bend right] (2.70);}
+    \onslide<11-|handout:1>{\node[below,gray,scale=.8] at(2.south) {2};}
+    \onslide<12-|handout:1>{\draw[lgray,thick,-Kite] (2.110) to[bend right] (3.70);}
+    \onslide<13-|handout:1>{\node[below,gray,scale=.8] at(3.south) {3};}
 
-    \onslide<14-|handout:2>{
+    \onslide<14-|handout:1>{
         \node[below=5mm] at(current bounding box.south) {Ausgabe:  \T{1} \(\to\) \T{2} \(\to\) \T{3}};
     }
 \end{tikzpicture}}
@@ -604,9 +604,9 @@ int b(int x) {
 \centering
 \begin{plainjava}[escapeinside={!}{!}]
 !\md{3}!void t(int n) {
-!\md*{1}{10}!    if(n <= 0) return;
+!\md{10}!    if(n <= 0) return;
 !\md{4-5,7,9}!    System.out.println(n);
-    !\mb{6,8}!t(n - 1);!\mh[2]{11-14}!
+    !\mb{6,8}!t(n - 1);!\mh[1]{11-14}!
 }
 \end{plainjava}
 \resizebox{.8\linewidth}!{\begin{tikzpicture}[lblob/.append style={text=black,scale=.8},xscale=1.33]
@@ -617,21 +617,21 @@ int b(int x) {
     \onslide<8->{\node[lblob] (1) at(2,0) {t(1)}; \draw[lgray,thick,-Kite] (2) -- (1);}
     \onslide<9->{\node[below,gray,scale=.8] at(1.south) {1};}
     \onslide<10->{\node[lblob] (0) at(3,0) {t(0)}; \draw[lgray,thick,-Kite] (1) -- (0);}
-    \onslide<11-|handout:2>{\draw[lgray,thick,-Kite] (0.110) to[bend right] (1.70);}
-    \onslide<12-|handout:2>{\draw[lgray,thick,-Kite] (1.110) to[bend right] (2.70);}
-    \onslide<13-|handout:2>{\draw[lgray,thick,-Kite] (2.110) to[bend right] (3.70);}
-    \onslide<14-|handout:2>{
+    \onslide<11-|handout:1>{\draw[lgray,thick,-Kite] (0.110) to[bend right] (1.70);}
+    \onslide<12-|handout:1>{\draw[lgray,thick,-Kite] (1.110) to[bend right] (2.70);}
+    \onslide<13-|handout:1>{\draw[lgray,thick,-Kite] (2.110) to[bend right] (3.70);}
+    \onslide<14-|handout:1>{
         \node[below=5mm] at(current bounding box.south) {Ausgabe: \T{3} \(\to\) \T{2} \(\to\) \T{1}};
     }
 \end{tikzpicture}}
         \end{column}
     \end{columns}
 \begin{tikzpicture}[overlay,remember picture]
-    \onslide<15-|handout:2>{%
+    \onslide<15-|handout:1>{%
         \node[below left=.25cm,yshift=.8cm,scale=.6] (pingu) at (current page.north east) {\rotatebox[origin=c]{180}{\usebox\pinguA}};
         \node[left,scale=.6,text width=6.75cm,align=center,yshift=-.33cm] at (pingu.west) {Kurzgesagt: Passiert noch etwas im rekursiven Aufstieg oder nicht (tail).};
     }
-    \onslide<16-|handout:2>{%
+    \onslide<16-|handout:1>{%
         \node[above right=-.66cm,scale=.6] (pingu) at (current page.south west) {\rotatebox[origin=c]{-45}{\usebox\pinguB}};
         \node[above=1.5mm,scale=.5,gray,text width=5.5cm,align=center,yshift=-.33cm] at (pingu.north east) {Disclaimer: Die Feinheiten einer Head-Rekursion werden hier vernachlässigt. Tail-Rekursionen sind interessanter, da sie sich problemlos in Iterationen transformieren lassen.};
     }
