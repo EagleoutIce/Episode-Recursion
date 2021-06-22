@@ -292,24 +292,23 @@ class Mega {
 \PreCode\StartCode
 \onslide<2->{\Fn{recursive($\langle$problem arguments$\rangle$)}{%
     \onslide<3->{\uIf{at elemental problem}{
-        \onslide<4->{
-            solve elemental problem\;
+            \onslide<4->{
+                solve elemental problem\;
+            }
         }
-    }}
-    \onslide<5->{
         \Else{%
-            \onslide<6->{Split problem into smaller ones\;}
-            \onslide<7->{Try to solve them recursively\;}
-            \onslide<8->{Combine step-solutions to one\;}
+            \onslide<5->{Split problem into smaller ones\;}
+            \onslide<6->{Try to solve them recursively\;}
+            \onslide<7->{Combine step-solutions to one\;}
         }
     }
 }}
 \end{algorithm}
 \end{column} \begin{column}{.35\linewidth}
-\centering\onslide<9->{\begin{tikzpicture}
+\centering\onslide<8->{\begin{tikzpicture}
     \node[scale=.6] (pingu) at(0,0) {\usebox\pinguA};
-    \node[lblock,above=-7mm,scale=.6,align=center,text width=5cm,fill opacity=.775] at(pingu.north) {%
-        \color{black}Nicht alle müssen genau dieser Struktur folgen. Wir werden dies später genauer betrachten.%
+    \node[below=1mm,scale=.6,align=center,text width=5cm,fill opacity=.775] at(pingu.south) {%
+        Nicht alle müssen genau dieser Struktur folgen. Wir werden dies später genauer betrachten.%
     };
 \end{tikzpicture}}
 \end{column}
