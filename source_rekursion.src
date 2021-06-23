@@ -283,7 +283,7 @@ class Mega {
 
 \section{Theoretisches}
 \subsection{Der Grundriss einer Rekursion}
-\savebox\pinguA{\tikz{\pingu[eyes wink, wings wave, eye patch left, eye patch right,belly=\Large\faStar,lightsaber left=paletteD,lightsaber left outer glow factor=.055,lightsaber left angle=42,pants=pingu@bronze,pants bands]}}%
+\savebox\pinguA{\tikz{\pingu[eyes wink, wings wave, eye patch left, eye patch right,belly=\Large\faStar,lightsaber left=paletteB!90!white,lightsaber left outer glow factor=.055,lightsaber left angle=42,pants=pingu@bronze,pants bands]}}%
 \begin{frame}{Anatomie einer Rekursion}
 \begin{columns}[c]
 \begin{column}{.6\linewidth}\linespread{1.5}\scriptsize%
@@ -523,28 +523,28 @@ int a(int m, int n) {
 \begin{plainjava}[escapeinside={!}{!}]
 !\md{3}!int a(int x) {
     if(x <= 0) return x + 1;
-    return !\mb{4,6,8}!b(x - 1);!\mh[3]{11,13,15}!
+    return !\mb{4,6,8}!b(x - 1);!\mh[2]{11,13,15}!
 }
 
 int b(int x) {
-!\md*{2}{9}!    if(x <= 0) return !\mb{10}!x;
-!\md*{1}{5}!    return !\mb{7}!a(x % 3);!\mh{12,14}!
+!\md*{1}{9}!    if(x <= 0) return !\mb{10}!x;
+!\md{5}!    return !\mb{7}!a(x % 3);!\mh{12,14}!
 }
 \end{plainjava}
         \end{column} \begin{column}{.425\linewidth}
 \centering\resizebox{.625\linewidth}!{\begin{tikzpicture}[lblob/.append style={text=black,scale=.8},xscale=1.33]
     \onslide<3->{\node[lblob] (0) at(0,0) {\T{a(42)}};}
     \onslide<4->{\node[lblob] (1) at(2,-.75) {\T{b(41)}}; \draw[lgray,thick,-Kite] (0) -- (1);}
-    \onslide<6-|handout:2->{\node[lblob] (2) at(0,-1.5) {\T{a(2)}}; \draw[lgray,thick,-Kite] (1) -- (2);}
-    \onslide<7-|handout:2->{\node[lblob] (3) at(2,-2.25) {\T{b(1)}}; \draw[lgray,thick,-Kite] (2) -- (3);}
-    \onslide<8-|handout:2->{\node[lblob] (4) at(0,-3) {\T{a(1)}}; \draw[lgray,thick,-Kite] (3) -- (4);}
-    \onslide<9-|handout:2->{\node[lblob] (5) at(2,-3.75) {\T{b(0)}}; \draw[lgray,thick,-Kite] (4) -- (5);}
-    \onslide<10-|handout:3->{\node[gray,right=1mm,scale=.9] at (5.east) {0};}
-    \onslide<11-|handout:3->{\node[gray,left=1mm,scale=.9] at (4.west) {0}; \draw[lgray,thick,-Kite] (5) to[bend right=20] (4);}
-    \onslide<12-|handout:3->{\node[gray,right=1mm,scale=.9] at (3.east) {0}; \draw[lgray,thick,-Kite] (4) to[bend left=20] (3);}
-    \onslide<13-|handout:3->{\node[gray,left=1mm,scale=.9] at (2.west) {0}; \draw[lgray,thick,-Kite] (3) to[bend right=20] (2);}
-    \onslide<14-|handout:3->{\node[gray,right=1mm,scale=.9] at (1.east) {0}; \draw[lgray,thick,-Kite] (2) to[bend left=20] (1);}
-    \onslide<15-|handout:3->{\node[gray,left=1mm,scale=.9] at (0.west) {0}; \draw[lgray,thick,-Kite] (1) to[bend right=20] (0);}
+    \onslide<6-|handout:1->{\node[lblob] (2) at(0,-1.5) {\T{a(2)}}; \draw[lgray,thick,-Kite] (1) -- (2);}
+    \onslide<7-|handout:1->{\node[lblob] (3) at(2,-2.25) {\T{b(1)}}; \draw[lgray,thick,-Kite] (2) -- (3);}
+    \onslide<8-|handout:1->{\node[lblob] (4) at(0,-3) {\T{a(1)}}; \draw[lgray,thick,-Kite] (3) -- (4);}
+    \onslide<9-|handout:1->{\node[lblob] (5) at(2,-3.75) {\T{b(0)}}; \draw[lgray,thick,-Kite] (4) -- (5);}
+    \onslide<10-|handout:2->{\node[gray,right=1mm,scale=.9] at (5.east) {0};}
+    \onslide<11-|handout:2->{\node[gray,left=1mm,scale=.9] at (4.west) {0}; \draw[lgray,thick,-Kite] (5) to[bend right=20] (4);}
+    \onslide<12-|handout:2->{\node[gray,right=1mm,scale=.9] at (3.east) {0}; \draw[lgray,thick,-Kite] (4) to[bend left=20] (3);}
+    \onslide<13-|handout:2->{\node[gray,left=1mm,scale=.9] at (2.west) {0}; \draw[lgray,thick,-Kite] (3) to[bend right=20] (2);}
+    \onslide<14-|handout:2->{\node[gray,right=1mm,scale=.9] at (1.east) {0}; \draw[lgray,thick,-Kite] (2) to[bend left=20] (1);}
+    \onslide<15-|handout:2->{\node[gray,left=1mm,scale=.9] at (0.west) {0}; \draw[lgray,thick,-Kite] (1) to[bend right=20] (0);}
 \end{tikzpicture}}
         \end{column}
     \end{columns}
@@ -740,14 +740,14 @@ int alpha(int a, int n) \{^^J
 !*\onslide<3->*!}
 \end{plainjava}
 \begin{tikzpicture}[remember picture,overlay]
-    \onslide<2->{\node[above left=.5cm,yshift=1,font=\scriptsize\sffamily,gray,text width=5cm] at(current page.south east) {\begin{align*}
+    \onslide<2->{\node[above left=.5cm,yshift=1,font=\scriptsize\sffamily,gray,xshift=-.33cm,text width=5cm] at(current page.south east) {\begin{align*}
         \phi(a, b, 0) &= a + b \\
         \phi(a, 0, n) &= \alpha(a, n - 1) \\
         \phi(a, b, n) &= \phi(a, \phi(a, b - 1, n), n - 1)
     \end{align*}};}
 
     \onslide<3->{
-        \node[above right=.5cm,yshift=1cm,xshift=2cm] at (current page.south west) {%
+        \node[above right=.5cm,yshift=1cm,xshift=2.75cm] at (current page.south west) {%
             \bjava{f(1) = 1}\only<4->{, \bjava{f(2) = 4}}\only<5->{, \bjava{f(3) =\ }\faFlash}
         };
     }
