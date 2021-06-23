@@ -691,7 +691,7 @@ int alpha(int a, int n) \{^^J
 \}^^J
 \end{plainjava}
 \end{minipage}}
-\begin{frame}{Die Ackermann Funktion, Alternativ}
+\begin{frame}{Die Ackermann Funktion, Alternativ\hfill \textcolor{shadeA}{\textbf{I}}}
 \centering\begin{align*}
     \onslide<2->{f(n) &= \phi(n, n, n)}\\[1ex]
     \onslide<3->{\phi(a, b, 0) &= a + b }\\
@@ -810,3 +810,5 @@ int alpha(int a, int n) \{^^J
 % TODO: hilbert etc.
 
 \end{document}
+
+% TODO: Slides Gruppieren, untrscheiden zwischen Beispielen für die Präsentation und generell...
