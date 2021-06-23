@@ -283,7 +283,7 @@ class Mega {
 
 \section{Theoretisches}
 \subsection{Der Grundriss einer Rekursion}
-\savebox\pinguA{\tikz{\pingu[eyes wink, wings wave, eye patch left, eye patch right,belly=\Large\faStar,lightsaber left=paletteB!90!white,lightsaber left outer glow factor=.055,lightsaber left angle=42,pants=pingu@bronze,pants bands]}}%
+\savebox\pinguA{\tikz{\pingu[eyes wink, wings wave, eye patch left, eye patch right,belly=\Large\faStar,lightsaber left=paletteB!85!white,lightsaber left outer glow factor=.055,lightsaber left angle=42,pants=pingu@bronze,pants bands]}}%
 \begin{frame}{Anatomie einer Rekursion}
 \begin{columns}[c]
 \begin{column}{.6\linewidth}\linespread{1.5}\scriptsize%
@@ -464,7 +464,7 @@ int a(int m, int n) {
 \end{frame}
 \SidebarReset
 
-\savebox\pinguA{\tikz{\pingu[crown 2d=pingu@bronze, wings grab, cup=paletteA, right eye wink]}}%
+\savebox\pinguA{\tikz{\pingu[crown 2d=pingu@bronze, wings grab, cup=paletteA, right eye wink,crown gem colors={paletteA!70!white}{paletteB!70!white}{paletteC!70!white}{paletteD!50!white}{paletteC!70!white}{paletteB!70!white}{paletteA!70!white}]}}%
 \savebox\pinguB{\tikz{\pingu[sunglasses, eyes wink, right wing grab, bow tie=paletteA,hairs=paletteD]}}%
 \subsubsection{Kaskadenförmige Rekursion}
 \SidebarCite{dive:fibonacci}
@@ -677,7 +677,7 @@ int b(int x) {
 \end{tikzpicture}
 \end{frame}
 
-\subsubsection{Ackermann Function}
+\subsubsection{Ackermann Funktion}
 \savebox\pinguA{\tikz{\pingu[wings wave, straw hat,belly=\Large\faCode,sunglasses, glasses opacity=.9]}}%
 \savebox\pinguB{\lstfs{8}%
 \begin{minipage}{5cm}
@@ -733,32 +733,63 @@ int alpha(int a, int n) \{^^J
 \begin{frame}[c,fragile]{Die Ackermann Funktion, Alternativ\hfill \textcolor{shadeA}{\textbf{III}}}
 \centering
 \begin{plainjava}
-!*\onslide<3->*!int phi(int a, int b, int n) {
+!*\onslide<2->*!int phi(int a, int b, int n) {
 !*\onslide<4->*!    if(n == 0) return a + b;
 !*\onslide<5->*!    else if (b == 0) return alpha(a, n - 1);
 !*\onslide<6->*!    else return phi(a, phi(a, b - 1, n), n - 1);
-!*\onslide<3->*!}
+!*\onslide<2->*!}
 \end{plainjava}
 \begin{tikzpicture}[remember picture,overlay]
-    \onslide<2->{\node[above left=.5cm,yshift=1,font=\scriptsize\sffamily,gray,xshift=-.33cm,text width=5cm] at(current page.south east) {\begin{align*}
+    \onslide<3->{\node[above left=.5cm,yshift=1,font=\scriptsize\sffamily,gray,xshift=-.33cm,text width=5cm] at(current page.south east) {\begin{align*}
         \phi(a, b, 0) &= a + b \\
         \phi(a, 0, n) &= \alpha(a, n - 1) \\
         \phi(a, b, n) &= \phi(a, \phi(a, b - 1, n), n - 1)
     \end{align*}};}
 
-    \onslide<3->{
-        \node[above right=.5cm,yshift=1cm,xshift=2.75cm] at (current page.south west) {%
-            \bjava{f(1) = 1}\only<4->{, \bjava{f(2) = 4}}\only<5->{, \bjava{f(3) =\ }\faFlash}
+    \onslide<7->{
+        \node[above right=.5cm,yshift=1cm,xshift=2.75cm] (xms) at (current page.south west) {%
+            \bjava{f(1) = 1}\only<8->{, \bjava{f(2) = 4}}\only<9->{, \bjava{f(3) =\ }\faFlash}
         };
+        \onslide<10->{
+            \node[below left,yshift=1mm] at(xms.south east) {
+                \tiny\color{gray}\(\gtrsim 2 \uparrow^2 7 \approx 10^{10^{10^{19\,000}}}\)
+            };
+        }
     }
 \end{tikzpicture}
 \end{frame}
 \subsection{Rekursive Strukturen}
 \begin{frame}{Rekursive Strukturen}
-    \begin{itemize}[<+(1)->]
-        \item Viele Datenstrukturen lassen sich rekursiv betrachten.\pause\\
-              \faAngleRight\ z.B. ein Baum in dem jeder Knoten Wurzel eines Teilbaumes ist.
-        \item So können wir auch die Operationen rekursiv definieren.
+    \begin{itemize}
+        \itemsep14pt
+        \item<2-> Viele Datenstrukturen lassen sich rekursiv betrachten.\\
+              \onslide<3->{\faAngleRight\ Bäume: jeder Knoten ist Wurzel eines Teilbaums.}\\
+              \onslide<4->{\faAngleRight\ Listen: jedes Element ist Kopf einer Teilliste.}\medskip
+\begin{center}
+\begin{columns}[c]
+\begin{column}{.45\linewidth}
+\centering\scalebox{.75}{\begin{tikzpicture}
+    \onslide<3->{\node[lblob] (0) at (0,0) {};
+    \node[lblob={fill=shadeA, draw=shadeA}] (1) at (-1.5,-1) {};
+    \node[lblob] (2) at (1.5,-1) {};
+    \node[lblob] (3) at (-2.5,-2) {};
+    \node[lblob] (4) at (-.5,-2) {};
+    \graph[edges={thick,lgray,-Kite}]{(0) -> (1), (0) -> (2)};
+    \graph[edges={thick,shadeA,-Kite}]{(1) -> (3), (1) -> (4)};}
+\end{tikzpicture}}
+\end{column} \begin{column}{.45\linewidth}
+\centering\scalebox{.75}{\begin{tikzpicture}
+    \onslide<5->{\node[lblob] (0) at (0,0) {};
+    \node[lblob={fill=shadeA, draw=shadeA}] (1) at (1,-.5) {};
+    \node[lblob] (2) at (2,-1) {};
+    \node[lblob] (3) at (3,-1.5) {};
+    \node[lblob] (4) at (4,-2) {};
+    \graph[edges={thick,lgray,-Kite}]{(0) -> (1), (2) -> (3) -> (4)};}
+    \draw[shadeA,thick,-Kite] (1) -- (2);
+\end{tikzpicture}}
+\end{column}
+\end{columns}
+\end{center}
     \end{itemize}
 \end{frame}
 % Eine Funktion auf Listen und eine auf Bäumen
