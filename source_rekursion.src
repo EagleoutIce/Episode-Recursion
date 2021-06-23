@@ -754,7 +754,7 @@ class Node<T> \{^^J
 \begin{frame}[fragile]{Rekursive Strukturen}
 \begin{center}% two allows for better folding :D
 \begin{columns}[c]
-\begin{column}{.45\linewidth}
+\begin{column}{.55\linewidth}
 \centering\scalebox{.65}{\begin{tikzpicture}
     \onslide<3->{\node[lblob] (0) at (0,0) {};
     \node[lblob={fill=shadeA, draw=shadeA}] (1) at (-1.5,-1) {};
@@ -765,7 +765,7 @@ class Node<T> \{^^J
     \graph[edges={thick,shadeA,-Kite}]{(1) -> (3), (1) -> (4)};}
     \node[below=4mm,gray,font=\sffamily\footnotesize] at (current bounding box.south) {Jeder Knoten ist die Wurzel eines Teilbaums};
 \end{tikzpicture}}
-\end{column} \begin{column}{.45\linewidth}\lstfs{8}%
+\end{column} \begin{column}{.35\linewidth}\lstfs{8}%
 \begin{plainjava}[aboveskip=-10pt]
 !*\onslide<4->*!class Node {
 !*\onslide<4->*!    Node left;
@@ -776,7 +776,7 @@ class Node<T> \{^^J
 \end{column}
 \end{columns}\bigskip
 \begin{columns}[c]
-\begin{column}{.45\linewidth}
+\begin{column}{.55\linewidth}
 \centering\scalebox{.65}{\begin{tikzpicture}
     \onslide<5->{\node[lblob] (0) at (0,0) {};
     \node[lblob={fill=shadeA, draw=shadeA}] (1) at (1,-.5) {};
@@ -787,7 +787,7 @@ class Node<T> \{^^J
     \draw[shadeA,thick,-Kite] (1) -- (2);
     \node[below=4mm,gray,font=\sffamily\footnotesize] at (current bounding box.south) {Jedes Element ist Kopf einer Teilliste};}
 \end{tikzpicture}}
-\end{column} \begin{column}{.45\linewidth}\lstfs{8}
+\end{column} \begin{column}{.35\linewidth}\lstfs{8}
 \begin{plainjava}[aboveskip=-10pt]
 !*\onslide<6->*!class Element {
 !*\onslide<6->*!    Element next;
