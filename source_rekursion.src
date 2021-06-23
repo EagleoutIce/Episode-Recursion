@@ -253,7 +253,7 @@ class Mega {
     \onslide<16|handout:0>{%
         \node[lrel,below=1mm] (rbs) at (fs.south) {\resizebox{25.4mm}!{\bjava{<ret-b> =\ }\raisebox{-1pt}\faGenderless}};
         \node[lrel,below=11mm] (br3) at (br2.south) {\bjava{\"4\"}};
-        \draw[lightgray,very thick,-Kite]  (rbs.east) to[out=0,in=180] (br3.west);
+        \draw[lightgray,very thick,-Kite]  (rbs.east) to[out=-15,in=165] (br3.west);
     }
     \onslide<17|handout:5>{\node[lrel,below=11mm] (br3) at (br2.south) {\bjava{\"4\"}};}
     \onslide<18-|handout:6->{%
@@ -262,7 +262,7 @@ class Mega {
     \onslide<17|handout:5>{%
         \node[lsf,below=1mm] (print) at (fs.south) {\resizebox{25.4mm}!{\textit{\color{gray}\bjava{PrintStream::print}}}\nodepart{second} \scriptsize\textit{omitted}};
         \draw[ultra thick,lgray] (print.text split west) -- (print.text split east);
-        \draw[lightgray,very thick,-Kite]  ([yshift=-2.5mm]print.east) to[out=0,in=180] (br3.west);
+        \draw[lightgray,very thick,-Kite]  ([yshift=-2.5mm]print.east) to[out=-15,in=165] (br3.west);
     }
     \onslide<19-|handout:6->{%
         \node[above=1mm,scale=.65] (pingu3) at (1.5,0) {\usebox\pinguC};
@@ -283,14 +283,14 @@ class Mega {
 
 \section{Theoretisches}
 \subsection{Der Grundriss einer Rekursion}
-\savebox\pinguA{\tikz{\pingu[eyes wink, wings wave, eye patch left, eye patch right,belly=\Large\faStar,lightsaber left=paletteB!85!white,lightsaber left outer glow factor=.055,lightsaber left angle=42,pants=pingu@bronze,pants bands]}}%
+\savebox\pinguA{\tikz{\pingu[eyes wink, wings wave, eye patch left, eye patch right,belly=\Large\faStar,lightsaber left=paletteB!81!white,lightsaber left outer glow factor=.0615,lightsaber left angle=42,pants=pingu@bronze,pants bands]}}%
 \begin{frame}{Anatomie einer Rekursion}
 \begin{columns}[c]
 \begin{column}{.6\linewidth}\linespread{1.5}\scriptsize%
 \SetKwProg{Fn}{func}{ is}{end}%
 \begin{algorithm}[H]
 \PreCode\StartCode
-\onslide<2->{\Fn{recursive($\langle$problem arguments$\rangle$)}{%
+\onslide<2->{\Fn{recursive(problem arguments)}{%
     \onslide<3->{\uIf{at elemental problem}{
             \onslide<4->{
                 solve elemental problem\;
@@ -307,8 +307,8 @@ class Mega {
 \end{column} \begin{column}{.35\linewidth}
 \centering\onslide<8->{\begin{tikzpicture}
     \node[scale=.6] (pingu) at(0,0) {\usebox\pinguA};
-    \node[below=1mm,scale=.6,align=center,text width=5cm,fill opacity=.775] at(pingu.south) {%
-        Nicht alle müssen genau dieser Struktur folgen. Wir werden dies später genauer betrachten.%
+    \node[below=1mm,scale=.6,align=center,text width=5cm] at(pingu.south) {%
+        Nicht alle müssen genau dieser Struktur folgen.\\[.5ex] Be special. Be wild!%
     };
 \end{tikzpicture}}
 \end{column}
@@ -373,18 +373,18 @@ class Mega {
 \subsubsection{Lineare Rekursion}
 \begin{frame}[fragile]{Lineare Rekursion}
     \pause\begin{columns}[c]
-        \begin{column}{.575\linewidth}\lstfs{8}
+        \begin{column}{.525\linewidth}\lstfs{8}
 \begin{plainjava}[escapeinside={!}{!}]
 !\md{2}!int f(int n) {
 !\md{6}!  if (n <= 0) return n;
 !\md{3}!  else return n + !\mb{4-5}!f(n - 1);!\mh{7-10}!
 }
 \end{plainjava}
-        \end{column} \begin{column}{.375\linewidth}
+        \end{column} \begin{column}{.425\linewidth}
 \begin{tikzpicture}
 \foreach[remember=\i as \li (initially 0)] \i/\mi/\ri/\xc in {1/3/9/3,2/4/9/3,3/5/8/1,4/6/7/0} {
     \onslide<\mi->{%
-        \node[lblob,scale=.625] (l\i) at (\i,-\i/3) {\color{black}\resizebox{4.75mm}!{\T{f(\the\numexpr4-\i)}}};
+        \node[lblob,scale=.825] (l\i) at (\i,-\i/3) {\color{black}\resizebox{4.75mm}!{\T{f(\the\numexpr4-\i)}}};
         \ifnum\li>0 \draw[lgray,thick,Kite-] (l\i) -- (l\li); \fi
     }
     \onslide<\ri->{%
@@ -401,7 +401,7 @@ class Mega {
     \onslide<11->{\node[above=12mm,scale=.6] (pingu) at(current page.south) {\usebox\pinguC};
         \node[below right=2mm,align=left,scale=.6,text width=7cm] at(pingu.north east) {%
             Die einfachste und geläufigste Form der Rekursion.\medskip\\
-            Hier handelt es sich sogar um eine \textit{primitiv-rekursive} Funktion!~\cite{dive:recursion}%
+            Hier handelt es sich sogar um eine \textit{primitiv-rekursive} Funktion!\textsuperscript{\cite{dive:recursion}}%
         };
     }
     \onslide<12->{%
@@ -445,7 +445,7 @@ int a(int m, int n) {
 \begin{tikzpicture}[overlay,remember picture]
     \onslide<2->{%
         \node[below left=.25cm,yshift=.8cm,scale=.6] (pingu) at (current page.north east) {\rotatebox[origin=c]{180}{\usebox\pinguB}};
-        \node[left,scale=.6,text width=6.33cm,align=center,yshift=-.33cm] at (pingu.west) {Dies ist die Ackermann Funktion!};
+        \node[left,scale=.6,gray,xshift=.5cm,text width=6.33cm,align=center,yshift=-.33cm] at (pingu.west) {Dies ist die Ackermann Funktion!};
     }
     \onslide<13-|handout:2->{%
         \node[above right,yshift=12mm,scale=.6,text width=30mm,align=right] (pingu2) at(current page.south) {\only<13-14|handout:0>{\usebox\pinguA}\only<15-|handout:2->{\usebox\pinguC}};
@@ -508,7 +508,7 @@ int a(int m, int n) {
     }
     \onslide<22-|handout:2>{%
         \node[below left=.25cm,yshift=.8cm,scale=.6] (pingu) at (current page.north east) {\rotatebox[origin=c]{180}{\usebox\pinguB}};
-        \node[left=-2mm,scale=.6,text width=6.75cm,align=center,yshift=-.33cm] at (pingu.west) {Sie wird manchmal auch \say{verzweigte Rekursion} genannt.};
+        \node[left=-2mm,scale=.6,text width=6.75cm,gray,xshift=.15cm,align=center,yshift=-.33cm] at (pingu.west) {Sie wird manchmal auch \say{verzweigte Rekursion} genannt.};
     }
 \end{tikzpicture}
     \end{columns}
@@ -657,7 +657,7 @@ int b(int x) {
     \color{gray}f_n &\color{gray}:~ \N \to \N, n \mapsto n \cdot \only<5|handout:1>{\text{\hspace*{-2pt}\tikz[baseline=-.45ex]{\node[fill=shadeA!40!white,rounded corners=2pt,outer sep=0pt,inner xsep=0pt,inner ysep=1pt] {\hspace*{2pt}$f_{n - 1}$\hspace*{2pt}};}\hspace*{-2pt}}}\only<6-|handout:0>{f_{n - 1}} \\
         & \color{gray}f_1 = 1
 \end{align*}}
-\end{column} \begin{column}{.475\linewidth}
+\end{column} \begin{column}{.475\linewidth}\lstfs{9}
 \begin{plainjava}
 !*\onslide<6->*!public int f(int n) {
 !*\onslide<7->*!  if(n <= 1) return 1;
@@ -695,16 +695,16 @@ int alpha(int a, int n) \{^^J
 \centering\begin{align*}
     \onslide<2->{f(n) &= \phi(n, n, n)}\\[1ex]
     \onslide<3->{\phi(a, b, 0) &= a + b }\\
-    \onslide<4->{\phi(a, 0, n) &= \alpha(a, n - 1)} \\
-    \onslide<5->{\phi(a, b, n) &= \phi(a, \phi(a, b - 1, n), n - 1)} \\[1ex]
-    \onslide<6->{\color{gray} \alpha(a, n) &= \color{gray}\begin{cases}
+    \onslide<3->{\phi(a, 0, n) &= \alpha(a, n - 1)} \\
+    \onslide<3->{\phi(a, b, n) &= \phi(a, \phi(a, b - 1, n), n - 1)} \\[1ex]
+    \onslide<4->{\alpha(a, n) &= \begin{cases}
         0, \quad &\text{ wenn } n = 0 \\
         1, \quad &\text{ wenn } n = 1 \\
         a, \quad &\text{ wenn } n > 1
     \end{cases}}
 \end{align*}
 \begin{tikzpicture}[remember picture,overlay]
-    \onslide<7->{%
+    \onslide<5->{%
         \node[above right=.25cm,yshift=1cm,scale=.6] (pingu) at (current page.south west) {\usebox\pinguA};
         \node[above=1mm,xshift=.85cm,scale=.75,text width=4.5cm,align=left,font=\footnotesize\sffamily] at(pingu.north) {\usebox\pinguB};
     }
@@ -721,7 +721,7 @@ int alpha(int a, int n) \{^^J
 !*\onslide<2->*!}
 \end{plainjava}
 \begin{tikzpicture}[remember picture,overlay]
-    \onslide<3->{\node[above left=.5cm,yshift=1,font=\scriptsize\sffamily,gray,xshift=-.33cm,text width=5cm] at(current page.south east) {\begin{align*}
+    \onslide<3-|handout:0>{\node[above left=.5cm,yshift=1,font=\scriptsize\sffamily,gray,xshift=-.33cm,text width=5cm] at(current page.south east) {\begin{align*}
         \phi(a, b, 0) &= a + b \\
         \phi(a, 0, n) &= \alpha(a, n - 1) \\
         \phi(a, b, n) &= \phi(a, \phi(a, b - 1, n), n - 1)
@@ -763,7 +763,7 @@ class Node<T> \{^^J
     \node[lblob] (4) at (-.5,-2) {};
     \graph[edges={very thick,lgray,-Kite}]{(0) -> (1), (0) -> (2)};
     \graph[edges={very thick,shadeA,-Kite}]{(1) -> (3), (1) -> (4)};
-    \node[below=4mm,gray,font=\sffamily\footnotesize] at (current bounding box.south) {Jeder Knoten ist die Wurzel eines Teilbaums};}
+    \node[below=4mm,font=\sffamily\footnotesize] at (current bounding box.south) {Jeder Knoten ist die Wurzel eines Teilbaums};}
 \end{tikzpicture}}
 \end{column} \begin{column}{.35\linewidth}\lstfs{8}%
 \begin{plainjava}[aboveskip=-10pt]
@@ -785,7 +785,7 @@ class Node<T> \{^^J
     \node[lblob] (4) at (4,-2) {};
     \graph[edges={very thick,lgray,-Kite}]{(0) -> (1), (2) -> (3) -> (4)};
     \draw[shadeA,very thick,-Kite] (1) -- (2);
-    \node[below=4mm,gray,font=\sffamily\footnotesize] at (current bounding box.south) {Jedes Element ist Kopf einer Teilliste};}
+    \node[below=4mm,font=\sffamily\footnotesize] at (current bounding box.south) {Jedes Element ist Kopf einer Teilliste};}
 \end{tikzpicture}}
 \end{column} \begin{column}{.35\linewidth}\lstfs{8}
 \begin{onlyenv}<6->
