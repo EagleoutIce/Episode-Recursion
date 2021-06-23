@@ -695,8 +695,8 @@ int alpha(int a, int n) \{^^J
 \centering\begin{align*}
     \onslide<2->{f(n) &= \phi(n, n, n)}\\[1ex]
     \onslide<3->{\phi(a, b, 0) &= a + b }\\
-    \onslide<4->{\phi(a, 0, n +1) &= \alpha(a, n)} \\
-    \onslide<5->{\phi(a, b + 1, n + 1) &= \phi(a, \phi(a, b, n + 1), n)} \\[1ex]
+    \onslide<4->{\phi(a, 0, n) &= \alpha(a, n - 1)} \\
+    \onslide<5->{\phi(a, b, n) &= \phi(a, \phi(a, b - 1, n), n - 1)} \\[1ex]
     \onslide<6->{\color{gray} \alpha(a, n) &= \color{gray}\begin{cases}
         0, \quad &\text{ wenn } n = 0 \\
         1, \quad &\text{ wenn } n = 1 \\
@@ -711,26 +711,7 @@ int alpha(int a, int n) \{^^J
 \end{tikzpicture}
 \end{frame}
 
-\savebox\pinguA{\tikz{\pingu[wings wave, left eye devil=paletteA,right eye wink,large,hat=paletteA]}}%
-\begin{frame}{Die Ackermann Funktion, Alternativ\hfill \textcolor{shadeA}{\textbf{II}}}
-\centering\begin{align*}
-    \onslide<2->{\phi(a, b, 0) &= a + b \\
-    \phi(a, 0, n +1) &= \alpha(a, n) \\
-    \phi(a, b + 1, n + 1) &= \phi(a, \phi(a, b, n + 1), n)}\\[1ex]
-    \onslide<3->{&\Downarrow \\[1ex]
-    \phi(a, b, 0) &= a + b \\
-    \phi(a, 0, n) &= \alpha(a, n - 1) \\
-    \phi(a, b, n) &= \phi(a, \phi(a, b - 1, n), n - 1)}
-\end{align*}
-\begin{tikzpicture}[overlay,remember picture]
-    \onslide<4->{%
-        \node[above right=-.75cm,scale=.6] (pingu) at (current page.south west) {\rotatebox[origin=c]{-45}{\usebox\pinguA}};
-        \node[above=1mm,scale=.5,text width=5.5cm,align=center,yshift=-.45cm] at (pingu.north east) {Dieser Schritt ist nicht notwendig, vereinfacht aber die Vorstellung bezüglich der vorherigen Folgenglieder.};
-    }
-\end{tikzpicture}%
-\end{frame}
-
-\begin{frame}[c,fragile]{Die Ackermann Funktion, Alternativ\hfill \textcolor{shadeA}{\textbf{III}}}
+\begin{frame}[c,fragile]{Die Ackermann Funktion, Alternativ\hfill \textcolor{shadeA}{\textbf{II}}}
 \centering
 \begin{plainjava}
 !*\onslide<2->*!int phi(int a, int b, int n) {
@@ -747,7 +728,7 @@ int alpha(int a, int n) \{^^J
     \end{align*}};}
 
     \onslide<7->{
-        \node[above right=.5cm,yshift=1cm,xshift=2.75cm] (xms) at (current page.south west) {%
+        \node[above right=.5cm,yshift=1.33cm,xshift=2.75cm] (xms) at (current page.south west) {%
             \bjava{f(1) = 1}\only<8->{, \bjava{f(2) = 4}}\only<9->{, \bjava{f(3) =\ }\faFlash}
         };
         \onslide<10->{
