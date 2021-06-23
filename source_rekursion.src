@@ -740,16 +740,22 @@ int alpha(int a, int n) \{^^J
 \end{tikzpicture}
 \end{frame}
 \subsection{Rekursive Strukturen}
-\begin{frame}{Rekursive Strukturen}
-    \begin{itemize}
-        \itemsep14pt
-        \item<2-> Viele Datenstrukturen lassen sich rekursiv betrachten.\\
-              \onslide<3->{\faAngleRight\ Bäume: jeder Knoten ist Wurzel eines Teilbaums.}\\
-              \onslide<4->{\faAngleRight\ Listen: jedes Element ist Kopf einer Teilliste.}\medskip
-\begin{center}
+\savebox\pinguA{\tikz{\pingu[wings wave, left eye devil=paletteA,right eye wink,large,hat=paletteA]}}%
+\savebox\pinguB{%
+\begin{minipage}{5cm}
+\begin{plainjava}[morekeywords={[3]{T}}]^^J
+class Node<T> \{^^J
+\ \ Node left;^^J
+\ \ Node right;^^J
+\ \ T data;^^J
+\}^^J
+\end{plainjava}
+\end{minipage}}%
+\begin{frame}[fragile]{Rekursive Strukturen}
+\begin{center}% two allows for better folding :D
 \begin{columns}[c]
 \begin{column}{.45\linewidth}
-\centering\scalebox{.75}{\begin{tikzpicture}
+\centering\scalebox{.65}{\begin{tikzpicture}
     \onslide<3->{\node[lblob] (0) at (0,0) {};
     \node[lblob={fill=shadeA, draw=shadeA}] (1) at (-1.5,-1) {};
     \node[lblob] (2) at (1.5,-1) {};
@@ -757,21 +763,46 @@ int alpha(int a, int n) \{^^J
     \node[lblob] (4) at (-.5,-2) {};
     \graph[edges={thick,lgray,-Kite}]{(0) -> (1), (0) -> (2)};
     \graph[edges={thick,shadeA,-Kite}]{(1) -> (3), (1) -> (4)};}
+    \node[below=4mm,gray,font=\sffamily\footnotesize] at (current bounding box.south) {Jeder Knoten ist die Wurzel eines Teilbaums};
 \end{tikzpicture}}
-\end{column} \begin{column}{.45\linewidth}
-\centering\scalebox{.75}{\begin{tikzpicture}
+\end{column} \begin{column}{.45\linewidth}\lstfs{8}%
+\begin{plainjava}[aboveskip=-10pt]
+!*\onslide<4->*!class Node {
+!*\onslide<4->*!    Node left;
+!*\onslide<4->*!    Node right;
+!*\onslide<4->*!    int data;
+!*\onslide<4->*!}
+\end{plainjava}
+\end{column}
+\end{columns}\bigskip
+\begin{columns}[c]
+\begin{column}{.45\linewidth}
+\centering\scalebox{.65}{\begin{tikzpicture}
     \onslide<5->{\node[lblob] (0) at (0,0) {};
     \node[lblob={fill=shadeA, draw=shadeA}] (1) at (1,-.5) {};
     \node[lblob] (2) at (2,-1) {};
     \node[lblob] (3) at (3,-1.5) {};
     \node[lblob] (4) at (4,-2) {};
-    \graph[edges={thick,lgray,-Kite}]{(0) -> (1), (2) -> (3) -> (4)};}
+    \graph[edges={thick,lgray,-Kite}]{(0) -> (1), (2) -> (3) -> (4)};
     \draw[shadeA,thick,-Kite] (1) -- (2);
+    \node[below=4mm,gray,font=\sffamily\footnotesize] at (current bounding box.south) {Jedes Element ist Kopf einer Teilliste};}
 \end{tikzpicture}}
+\end{column} \begin{column}{.45\linewidth}\lstfs{8}
+\begin{plainjava}[aboveskip=-10pt]
+!*\onslide<6->*!class Element {
+!*\onslide<6->*!    Element next;
+!*\onslide<6->*!    int data;
+!*\onslide<6->*!}
+\end{plainjava}
 \end{column}
 \end{columns}
 \end{center}
-    \end{itemize}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<4->{%
+        \node[above right=-.85cm,scale=.6] (pingu) at (current page.south west) {\rotatebox[origin=c]{-45}{\usebox\pinguA}};
+        \node[above=1mm,scale=.5,text width=5.5cm,align=center,yshift=-.45cm,xshift=-.65cm] at (pingu.north east) {\usebox\pinguB\\[1ex]Cooler mit Generics!\textsuperscript{\cite{dive:java-generics}}};
+    }
+\end{tikzpicture}%
 \end{frame}
 % Eine Funktion auf Listen und eine auf Bäumen
 \subsection{Weitere Probleme}
