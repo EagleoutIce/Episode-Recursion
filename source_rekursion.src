@@ -1152,7 +1152,7 @@ boolean nQueens(boolean[][] board) \{^^J
             \item Primitiv-Rekursive Funktionen
         \end{itemize}
         \item Stack-Frames sind spannender und enthalten noch mehr!
-        \item Das riesige Thema des Compilerbaus liefert mehr
+        \item Das riesige Thema des Compilerbaus liefert mehr:
         \begin{itemize}
             \itemsep3pt
             \item Optimierungen \& Transformationen
@@ -1160,7 +1160,7 @@ boolean nQueens(boolean[][] board) \{^^J
         \end{itemize}
     \end{itemize}
 \begin{tikzpicture}[remember picture, overlay]
-    \onslide<9->{\node[scale=.6,above left=.5cm,yshift=.65cm,xshift=-7.65cm] (p1) at(current page.south east) {\usebox\pinguA};}
+    \onslide<9->{\node[scale=.6,above left=.5cm,yshift=.85cm,xshift=-7.65cm] (p1) at(current page.south east) {\usebox\pinguA};}
     \onslide<10->{\node[scale=.6,above right] (p2) at(p1.south east) {\usebox\pinguB};}
     \onslide<11->{\node[scale=.6,above right] (p3) at(p2.south east) {\usebox\pinguC};}
 \end{tikzpicture}
