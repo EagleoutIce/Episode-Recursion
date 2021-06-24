@@ -863,17 +863,97 @@ class Element {
 % Eine Funktion auf Listen und eine auf Bäumen
 \subsection{Weitere Probleme}
 \begin{frame}{Die Welt rekursiver Probleme}
-    \begin{itemize}[<+(1)->]
+    \begin{itemize}
         \itemsep14pt
-        \item Es gibt viele gute Beispiele!
+        \item<2-> Es gibt viele gute Beispiele!
         \begin{multicols}{2}
             \begin{enumerate}
-                \item Rekursive Sortierverfahren
-                \item Die Türme von Hanoi
-                \item Das N-Dame Problem
+                \item<3-> Rekursive Sortierverfahren
+\begin{center}
+\resizebox{\linewidth}!{\begin{tikzpicture}[lgray,b/.style={decoration={brace,mirror,amplitude=4pt},very thick,decorate}]
+    \onslide<4->{\node[lblob] (0) at (0,0) {};
+    \node[lblob] (1) at (1,0) {};
+    \node[lblob] (2) at (2,0) {};
+    \node[lblob] (3) at (3,0) {};
+    \node[lblob] (4) at (4,0) {};
+    \node[lblob] (5) at (5,0) {};
+    \node[lblob] (6) at (6,0) {};}
+    \onslide<5|handout:1>{
+        \draw[b] ([yshift=-2mm]0.south west) -- ([yshift=-2mm]3.south east);
+        \draw[b] ([yshift=-2mm]4.south west) -- ([yshift=-2mm]6.south east);
+    }
+    \onslide<6|handout:0>{
+        \draw[b] ([yshift=-2mm]0.south west) -- ([yshift=-2mm]1.south east);
+        \draw[b] ([yshift=-2mm]2.south west) -- ([yshift=-2mm]3.south east);
+        \draw[b] ([yshift=-2mm]4.south west) -- ([yshift=-2mm]5.south east);
+        \draw[b] ([yshift=-2mm]6.south west) -- ([yshift=-2mm]6.south east);
+    }
+    \onslide<7-|handout:0>{
+        \foreach \i in {0, ..., 6} {
+            \draw[b] ([yshift=-2mm]\i.south west) -- ([yshift=-2mm]\i.south east);
+        }
+    }
+\end{tikzpicture}}\medskip
+\end{center}
+                \item<8-> Die Türme von Hanoi
+\begin{center}
+\resizebox{\linewidth}!{\begin{tikzpicture}[lgray,rounded corners=1pt]
+    \onslide<9-|handout:1>{
+        \foreach \i in {1.5, 3, 4.5} {
+            \fill[gray]  (\i,0) -| ++(1,.1) -|++(-.45,.55) -| ++(-.1,-.55) -| cycle;
+        }
+    }
+    \onslide<9|handout:0>{
+        \fill (1.5 + .1,.1) rectangle ++(.8,.1);
+        \fill (1.5 + .2,.2) rectangle ++(.6,.1);
+        \fill (1.5 + .3,.3) rectangle ++(.4,.1);
+    }
+    \onslide<10|handout:0>{
+        \fill (1.5 + .1,.1) rectangle ++(.8,.1);
+        \fill (1.5 + .2,.2) rectangle ++(.6,.1);
+        \fill[shadeA] (4.5 + .3,.1) rectangle ++(.4,.1);
+    }
+    \onslide<11|handout:0>{
+        \fill (1.5 + .1,.1) rectangle ++(.8,.1);
+        \fill[shadeA] (3 + .2,.1) rectangle ++(.6,.1);
+        \fill (4.5 + .3,.1) rectangle ++(.4,.1);
+    }
+    \onslide<12|handout:1>{
+        \fill (1.5 + .1,.1) rectangle ++(.8,.1);
+        \fill (3 + .2,.1) rectangle ++(.6,.1);
+        \fill[shadeA] (3 + .3,.2) rectangle ++(.4,.1);
+    }
+    \onslide<13|handout:0>{
+        \fill[shadeA] (4.5 + .1,.1) rectangle ++(.8,.1);
+        \fill (3 + .2,.1) rectangle ++(.6,.1);
+        \fill (3 + .3,.2) rectangle ++(.4,.1);
+    }
+    \onslide<14|handout:0>{
+        \fill (4.5 + .1,.1) rectangle ++(.8,.1);
+        \fill (3 + .2,.1) rectangle ++(.6,.1);
+        \fill[shadeA] (1.5 + .3,.1) rectangle ++(.4,.1);
+    }
+    \onslide<15|handout:0>{
+        \fill (4.5 + .1,.1) rectangle ++(.8,.1);
+        \fill[shadeA] (4.5 + .2,.2) rectangle ++(.6,.1);
+        \fill (1.5 + .3,.1) rectangle ++(.4,.1);
+    }
+    \onslide<16|handout:0>{
+        \fill (4.5 + .1,.1) rectangle ++(.8,.1);
+        \fill (4.5 + .2,.2) rectangle ++(.6,.1);
+        \fill[shadeA] (4.5 + .3,.3) rectangle ++(.4,.1);
+    }
+    \onslide<17|handout:0>{
+        \fill (4.5 + .1,.1) rectangle ++(.8,.1);
+        \fill (4.5 + .2,.2) rectangle ++(.6,.1);
+        \fill (4.5 + .3,.3) rectangle ++(.4,.1);
+    }
+\end{tikzpicture}}\medskip
+\end{center}
+                \item<17-> Das N-Dame Problem
                 \item Sudokus lösen
-                \item Wegfindung im Labyrinth
-                \item \href{https://introcs.cs.princeton.edu/java/32class/Hilbert.java.html}{Hilbert-Kurve Zeichnen},~\ldots
+                % \item Wegfindung im Labyrinth
+                % \item \href{https://introcs.cs.princeton.edu/java/32class/Hilbert.java.html}{Hilbert-Kurve Zeichnen},~\ldots
             \end{enumerate}
         \end{multicols}
         \item Allgemein: Alles was sich in (eventuell explorative) Einzelschritte zerteilen lässt.
