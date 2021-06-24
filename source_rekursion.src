@@ -1,6 +1,7 @@
 \input{preamble}
 
 \begin{document}
+\iffalse
 \section{Java-Stack}
 \SidebarCite{book:javase15-std}
 \begin{frame}[fragile]{Javas' Speicherverwaltung}
@@ -861,14 +862,15 @@ class Element {
 \end{tikzpicture}
 \end{frame}
 % Eine Funktion auf Listen und eine auf Bäumen
-\subsection{Weitere Probleme}
-\begin{frame}{Die Welt rekursiver Probleme}
-    \begin{itemize}
-        \itemsep14pt
-        \item<2-> Es gibt viele gute Beispiele!
-        \begin{multicols}{2}
-            \begin{enumerate}
-                \item<3-> Rekursive Sortierverfahren
+
+\fi\subsection{Weitere Probleme}
+\savebox\pinguA{\tikz{\pingu[wings shock,princess crown,eyes shiny,small,belly=\Large\faHeart,princess crown gem colors={paletteA}{paletteB}{paletteC}{paletteB}{paletteA}]}}%
+\savebox\pinguB{\tikz{\pingu[right eye wink,sign post left={\textbf{More!}},left wing wave,right wing grab,tie=paletteB]}}%
+\begin{frame}[c]{Die Welt rekursiver Probleme}
+\centering\columnsep30pt\begin{multicols}{2}
+    \begin{enumerate}
+        \itemsep10pt
+        \item<3-> Rekursives Sortieren
 \begin{center}
 \resizebox{\linewidth}!{\begin{tikzpicture}[lgray,b/.style={decoration={brace,mirror,amplitude=4pt},very thick,decorate}]
     \onslide<4->{\node[lblob] (0) at (0,0) {};
@@ -895,12 +897,12 @@ class Element {
     }
 \end{tikzpicture}}\medskip
 \end{center}
-                \item<8-> Die Türme von Hanoi
+        \item<8-> Die Türme von Hanoi
 \begin{center}
-\resizebox{\linewidth}!{\begin{tikzpicture}[lgray,rounded corners=1pt]
+\resizebox{\linewidth}!{\begin{tikzpicture}[lightgray,rounded corners=1pt]
     \onslide<9-|handout:1>{
         \foreach \i in {1.5, 3, 4.5} {
-            \fill[gray]  (\i,0) -| ++(1,.1) -|++(-.45,.55) -| ++(-.1,-.55) -| cycle;
+            \fill[lgray]  (\i,0) -| ++(1,.1) -|++(-.45,.55) -| ++(-.1,-.55) -| cycle;
         }
     }
     \onslide<9|handout:0>{
@@ -943,25 +945,61 @@ class Element {
         \fill (4.5 + .2,.2) rectangle ++(.6,.1);
         \fill[shadeA] (4.5 + .3,.3) rectangle ++(.4,.1);
     }
-    \onslide<17|handout:0>{
+    \onslide<17-|handout:0>{
         \fill (4.5 + .1,.1) rectangle ++(.8,.1);
         \fill (4.5 + .2,.2) rectangle ++(.6,.1);
         \fill (4.5 + .3,.3) rectangle ++(.4,.1);
     }
 \end{tikzpicture}}\medskip
 \end{center}
-                \item<17-> Das N-Dame Problem
-                \item Sudokus lösen
-                % \item Wegfindung im Labyrinth
-                % \item \href{https://introcs.cs.princeton.edu/java/32class/Hilbert.java.html}{Hilbert-Kurve Zeichnen},~\ldots
-            \end{enumerate}
-        \end{multicols}
-        \item Allgemein: Alles was sich in (eventuell explorative) Einzelschritte zerteilen lässt.
-    \end{itemize}
+        \item<17-> Das N-Dame Problem
+\begin{center}
+\resizebox{.55\linewidth}!{\begin{tikzpicture}[lgray,rounded corners=1pt]
+    \onslide<18-|handout:1>{
+        \draw[thick] (0,0) grid ++(5,5);
+    }
+    \onslide<19-|handout:1>{
+        \node[scale=.38] at(.5,1.5) {\usebox\pinguA};
+        \node[scale=.38] at(3.5,.5) {\usebox\pinguA};
+        \node[scale=.38] at(2.5,2.5) {\usebox\pinguA};
+        \node[scale=.38] at(4.5,3.5) {\usebox\pinguA};
+        \node[scale=.38] at(1.5,4.5) {\usebox\pinguA};
+    }
+\end{tikzpicture}}\medskip
+\end{center}
+    \end{enumerate}
+\end{multicols}\bigskip
+\begin{center}
+    \footnotesize\onslide<21->{Alles was sich in (eventuell explorative) Einzelschritte zerteilen lässt.}
+\end{center}
+\begin{tikzpicture}[remember picture,overlay]
+    \onslide<20->{%
+        \node[above right=.25cm,yshift=1cm,scale=.55] (pingu) at (current page.south west) {\usebox\pinguB};
+        \node[above=1mm,scale=.6,text width=4.5cm,align=center,font=\footnotesize\sffamily,xshift=.65cm] at(pingu.north) {%
+            \begin{itemize}
+                \item Sudokus
+                \item Wegfindung
+                \item \href{https://introcs.cs.princeton.edu/java/32class/Hilbert.java.html}{Hilbert-Kurven}
+                \item \ldots
+            \end{itemize}
+        };
+    }
+\end{tikzpicture}
 \end{frame}
 \subsubsection{Sorting}
-\begin{frame}
-
+\begin{frame}[fragile]{Rekursives Sortieren\hfill{\color{shadeA}\footnotesize\sbfamily Quicksort}}
+\begin{plainjava}
+!*\onslide<2->*!void quicksort(int[] arr) {
+!*\onslide<3->*!    quicksort(arr, 0, arr.length-1);
+!*\onslide<2->*!}
+!*\onslide<2->*!
+!*\onslide<3->*!void quicksort(int[] arr, int left, int right) {
+!*\onslide<4->*!    if(low >= right) return;
+!*\onslide<5->*!    int partIndex = partition(arr, left, right);
+!*\onslide<6->*!    quicksort(arr, left, partIndex - 1);
+!*\onslide<6->*!    quicksort(arr, partIndex + 1, right);
+!*\onslide<3->*!}
+\end{plainjava}
 \end{frame}
 \subsubsection{Towers of Hanoi}
 \begin{frame}
