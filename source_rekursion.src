@@ -806,15 +806,94 @@ class Element {
     }
 \end{tikzpicture}%
 \end{frame}
+
+\savebox\pinguA{\tikz{\pingu[left wing grab, right wing shock,right eye wink, left eye shock,halo]}}%
+\begin{frame}[c,fragile]{Einen Baum evaluieren}
+\begin{columns}
+\begin{column}{.4\linewidth}
+\centering\scalebox{.7}{\begin{tikzpicture}
+    \onslide<2->{\node[lblob] (0) at (0,0) {\strut\only<2-16|handout:1->{$*$}\only<17-|handout:0>{25}};
+    \onslide<2-16|handout:1->{\node[lblob] (1) at (-1.5,-1) {\only<2-15|handout:1->{$+$}\only<16-|handout:0>{5}};}
+    \onslide<2-16|handout:1->{\node[lblob] (2) at (1.5,-1) {5};}
+    \onslide<2-15|handout:1->{\node[lblob] (3) at (-2.5,-2) {2};}
+    \onslide<2-15|handout:1->{\node[lblob] (4) at (-.5,-2) {3};}
+    \onslide<2-16|handout:1->{\graph[edges={very thick,lgray,-Kite}]{(0) -> (1), (0) -> (2)};}
+    \onslide<2-15|handout:1->{\graph[edges={very thick,lgray,-Kite}]{(1) -> (3), (1) -> (4)};}
+    \node[below=4mm,font=\sffamily\footnotesize] at (current bounding box.south) {Ein Arithmetik-\only<2-16|handout:1->{Baum}\only<17-|handout:0>{Traum}!};}
+\end{tikzpicture}}\\[1.25ex]
+\lstfs{8}%
+\begin{uncoverenv}<3->
+\begin{plainjava}
+    class Node {
+        Node left, right;
+        int data; String op;
+    }
+\end{plainjava}
+\end{uncoverenv}
+\end{column}
+\begin{column}{.575\linewidth}
+\begin{uncoverenv}<5->
+\lstfs{8}%
+\begin{plainjava}[aboveskip=0pt,belowskip=0pt,escapeinside={!}{!}]
+!\onslide<5->!long postOrderEval(Node node) {
+!\onslide<6->!    if(node == null) throw new /* ... */;
+!\mdl[1]{13}\onslide<7->!    if(node.op == null) // no operation
+!\mdl[1]{13}\onslide<7->!        return node.data;
+!\mdl[2]{14}\onslide<8->!    long l = postOrderEval(node.left);
+!\mdl[2]{14}\onslide<8->!    long r = postOrderEval(node.right);
+!\mdl[2]{14}\onslide<9->!    switch(node.op) {
+!\mdl[2]{14}\onslide<9->!        case "+": !\onslide<10->!return l + r;
+!\mdl[2]{14}\onslide<9->!        case "*": !\onslide<11->!return l * r;
+!\mdl[2]{14}\onslide<12->!        // ... other cases, errors, ...
+!\mdl[2]{14}\onslide<9->!    }
+!\onslide<5->!}
+\end{plainjava}
+\end{uncoverenv}\onslide<1->
+\end{column}
+\end{columns}
+\begin{tikzpicture}[remember picture,overlay]
+    \onslide<4->{%
+        \node[above right=.25cm,yshift=1cm,scale=.6] (pingu) at (current page.south west) {\usebox\pinguA};
+        \node[above=1mm,xshift=.55cm,scale=.625,text width=4.25cm,align=center,font=\footnotesize\sffamily] at(pingu.north) {%
+        An sich würde man die Knoten anders realisieren.
+        Z.B. durch Vererbung.};
+    }
+\end{tikzpicture}
+\end{frame}
 % Eine Funktion auf Listen und eine auf Bäumen
 \subsection{Weitere Probleme}
+\begin{frame}{Die Welt rekursiver Probleme}
+    \begin{itemize}[<+(1)->]
+        \itemsep14pt
+        \item Es gibt viele gute Beispiele!
+        \begin{multicols}{2}
+            \begin{enumerate}
+                \item Rekursive Sortierverfahren
+                \item Die Türme von Hanoi
+                \item Das N-Dame Problem
+                \item Sudokus lösen
+                \item Wegfindung im Labyrinth
+                \item \href{https://introcs.cs.princeton.edu/java/32class/Hilbert.java.html}{Hilbert-Kurve Zeichnen},~\ldots
+            \end{enumerate}
+        \end{multicols}
+        \item Allgemein: Alles was sich in (eventuell explorative) Einzelschritte zerteilen lässt.
+    \end{itemize}
+\end{frame}
 \subsubsection{Sorting}
+\begin{frame}
+
+\end{frame}
 \subsubsection{Towers of Hanoi}
+\begin{frame}
+
+\end{frame}
+\subsubsection{Das N-Dame Problem}
+\begin{frame}
+
+\end{frame}
 \subsubsection{Sudoku Solver}
 \begin{frame}
-    % Sort structure
-    % Towers of Hanoi
-    % Sudoku Solver
+
 \end{frame}
 \section{Abschluss}
 % TODO: hinweisen auf Vorteil von tail rekursion
@@ -824,5 +903,3 @@ class Element {
 % TODO: hilbert etc.
 
 \end{document}
-
-% TODO: Slides Gruppieren, untrscheiden zwischen Beispielen für die Präsentation und generell...

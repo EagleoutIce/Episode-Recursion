@@ -45,11 +45,11 @@
         rectangle split, rectangle split parts=2},
     blob/.style={circle,draw, minimum size=1.9em,align=center},
     lblob/.style={blob,writ,font=\fillfont,#1},%
-    lblob/.default={fill=lgray, draw=lgray},
+    lblob/.default={fill=lgray, draw=lgray,text=black},
     every picture/.append style={line join=round,line cap=round},%
     every node/.append style={font=\sffamily},%
     lblock/.style={block,writ,font=\fillfont,#1},%
-    lblock/.default={fill=lgray, draw=lgray},
+    lblock/.default={fill=lgray, draw=lgray,text=black},
     block/.style={rectangle,draw, align=center, minimum height=1.25em,rounded corners=1.55pt},%
 }
 
@@ -100,6 +100,7 @@
 \def\@md#1#2{\only<#2|handout:#1>{\llap{\color{shadeA}\textbullet~}}}
 \newcommand*\mb[2][0]{\only<#2|handout:#1>{\rlap{\smash{\raisebox{-.66\baselineskip}{\color{shadeA}\textbullet}}}}}
 \newcommand*\mh[2][0]{\only<#2|handout:#1>{\color{shadeA}\textbullet}}
+\newcommand*\mdl[2][0]{\only<#2|handout:#1>{\llap{\smash{\raisebox{-.5\baselineskip}{\tikz{\fill[shadeA,rounded corners=1pt] (0,-.65mm) rectangle ++(2pt,\baselineskip+.65mm);}}~}}}}
 \makeatother
 
 \setcounter{tocdepth}{4}
