@@ -1,7 +1,6 @@
 \input{preamble}
 
 \begin{document}
-\iffalse
 \section{Java-Stack}
 \SidebarCite{book:javase15-std}
 \begin{frame}[fragile]{Javas' Speicherverwaltung}
@@ -863,7 +862,7 @@ class Element {
 \end{frame}
 % Eine Funktion auf Listen und eine auf Bäumen
 
-\fi\subsection{Weitere Probleme}
+\subsection{Weitere Probleme}
 \savebox\pinguA{\tikz{\pingu[wings shock,princess crown,eyes shiny,small,belly=\Large\faHeart,princess crown gem colors={paletteA}{paletteB}{paletteC}{paletteB}{paletteA}]}}%
 \savebox\pinguB{\tikz{\pingu[right eye wink,sign post left={\textbf{More!}},left wing wave,right wing grab,tie=paletteB]}}%
 \begin{frame}[c]{Die Welt rekursiver Probleme}
@@ -975,7 +974,7 @@ class Element {
 \begin{tikzpicture}[remember picture,overlay]
     \onslide<20->{%
         \node[above right=.25cm,yshift=1cm,scale=.55] (pingu) at (current page.south west) {\usebox\pinguB};
-        \node[above=1mm,scale=.6,text width=4.5cm,align=center,font=\footnotesize\sffamily,xshift=.65cm] at(pingu.north) {%
+        \node[above=1mm,scale=.6,text width=4.5cm,align=center,font=\footnotesize\sffamily,xshift=.85cm] at(pingu.north) {%
             \begin{itemize}
                 \item Sudokus
                 \item Wegfindung
@@ -987,35 +986,121 @@ class Element {
 \end{tikzpicture}
 \end{frame}
 \subsubsection{Sorting}
-\begin{frame}[fragile]{Rekursives Sortieren\hfill{\color{shadeA}\footnotesize\sbfamily Quicksort}}
+\begin{frame}[fragile]{Rekursives Sortieren\hfill{\color{shadeA}\footnotesize\sbfamily Quicksort}}\lstfs{8}
 \begin{plainjava}
 !*\onslide<2->*!void quicksort(int[] arr) {
-!*\onslide<3->*!    quicksort(arr, 0, arr.length-1);
+!*\onslide<3->*!    quicksort(arr, 0, arr.length - 1);
 !*\onslide<2->*!}
 !*\onslide<2->*!
-!*\onslide<3->*!void quicksort(int[] arr, int left, int right) {
-!*\onslide<4->*!    if(low >= right) return;
-!*\onslide<5->*!    int partIndex = partition(arr, left, right);
-!*\onslide<6->*!    quicksort(arr, left, partIndex - 1);
-!*\onslide<6->*!    quicksort(arr, partIndex + 1, right);
+!*\onslide<4->*!void quicksort(int[] arr, int left, int right) {
+!*\onslide<5->*!    if(low >= right) return;
+!*\onslide<6->*!    int partIndex = partition(arr, left, right);!*\tikzmark{partitionfunc}*!
+!*\onslide<7->*!    quicksort(arr, left, partIndex - 1);
+!*\onslide<7->*!    quicksort(arr, partIndex + 1, right);
+!*\onslide<4->*!}
+\end{plainjava}
+\begin{tikzpicture}[overlay,remember picture]
+\onslide<8->{\node[below right,xshift=1cm,gray,scale=.55,text width=4cm] (bzt) at (pic cs:partitionfunc) {%
+    Wählt Pivot und sortiert kleiner Pivotelement links und größer gleich rechts.%
+};
+\draw[lgray,thick,-Kite] (bzt.north west) to[out=135,in=0] (pic cs:partitionfunc);}
+\end{tikzpicture}
+\end{frame}
+\subsubsection{Die Türme von Hanoi}
+\savebox\pinguA{\begin{tikzpicture}[lightgray,rounded corners=1pt]
+    \foreach \i/\a in {1.5/A, 3/B, 4.5/C} {
+        \fill[lgray]  (\i,0) -| ++(1,.1) -|++(-.45,.55) -| ++(-.1,-.55) -| cycle;
+        \node[below=1mm,gray] at(\i+.5,0) {\a};
+    }
+    \fill (1.5 + .1,.1) rectangle ++(.8,.1);
+    \fill (1.5 + .2,.2) rectangle ++(.6,.1);
+    \fill (1.5 + .3,.3) rectangle ++(.4,.1);
+\end{tikzpicture}}
+\savebox\pinguB{\tikz{\pingu[wings wave, princess crown 2d=pingu@bronze,belly=\Large\faCode,sunglasses round, glasses opacity=.975]}}%
+\savebox\pinguC{%
+\begin{minipage}{5cm}%
+\begin{plainjava}[morekeywords={[3]{Pole}}]^^J
+enum Pole \{^^J
+\ \ SOURCE,^^J
+\ \ HELPER,^^J
+\ \ TARGET^^J
+\}^^J
+\end{plainjava}
+\end{minipage}}%
+\begin{frame}[fragile]{Die Türme von Hanoi}
+\begin{tikzpicture}[remember picture,overlay]
+    \onslide<2->{\node[below left=.33cm] at (current page.north east) {\usebox\pinguA};}
+    \onslide<7->{%
+        \node[above right=.25cm,yshift=1cm,scale=.6] (pingu) at (current page.south west) {\usebox\pinguB};
+        \node[above=1mm,xshift=.85cm,scale=.75,text width=4.5cm,align=left,font=\footnotesize\sffamily] at(pingu.north) {\usebox\pinguC};
+    }
+    \onslide<13->{%
+        \node[below right,xshift=.75cm, gray,scale=.55,text width=5.5cm,yshift=.25cm] (move-desc) at (pic cs:move-after) {%
+            Gibt im einfachsten Fall einfach \say{$a \to c$} aus.%
+        };
+        \draw[-Kite,lgray,thick] (move-desc.178) to[out=175,in=0] ([yshift=2pt]pic cs:move-after);
+    }
+\end{tikzpicture}%
+\scriptsize\begin{itemize}
+    \item<3-> Trivial für eine Scheibe: \(A \to C\).
+    \item<4-> Sonst: \begin{itemize}
+        \item<4-> \strut\scriptsize Bewege \(n - 1\) Scheiben auf Hilfsstapel: \(A \to B\).
+        \item<5-> \strut\scriptsize Bewege letzte Scheibe (größte) von \(A \to C\).
+        \item<6-> \strut\scriptsize Bewege \(n - 1\) Scheiben vom Hilfsstapel zum Ziel: \(B \to C\).
+    \end{itemize}
+\end{itemize}\normalsize\lstfs{7}
+\begin{plainjava}[morekeywords={[3]{Pole}}, morekeywords={[4]{move}}]
+!*\onslide<8->*!void hanoi(int disks, Pole a, Pole b, Pole c) {
+!*\onslide<9->*!    if(disks == 1) { move(a, c);!*\tikzmark{move-after}*! }
+!*\onslide<9->*!    else {
+!*\onslide<10->*!        hanoi(disks - 1, a, c, b); // move all disks above to help pole
+!*\onslide<11->*!        move(a, c); // move last disk to target
+!*\onslide<12->*!        hanoi(disks - 1, b, a, c); // move disks from help to target pole
+!*\onslide<9->*!    }
+!*\onslide<8->*!}
+\end{plainjava}
+\end{frame}
+
+\subsubsection{Das N-Dame Problem}
+\savebox\pinguA{%
+\begin{minipage}{7.35cm}
+\begin{plainjava}^^J
+boolean nQueens(boolean[][] board) \{^^J
+\ \ return nQueens(board, 0);^^J
+\}^^J
+\end{plainjava}
+\end{minipage}
+}
+\savebox\pinguB{\tikz{\pingu[right eye wink,sign post right={\textbf{Task}}, sign post right color=paletteA,right wing wave,left wing grab,medal=paletteA,medal text=!]}}%
+\begin{frame}[fragile]{Das N-Dame Problem}\lstfs{8}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<2->{\node[below left=.33cm,cloud,fill=lgray!30!white,inner sep=-4.5mm,aspect=4,scale=.65,cloud ignores aspect] at (current page.north east) {\usebox\pinguA};}
+    \onslide<11->{
+        \node[above left=.33cm,scale=.65,yshift=.5cm] (pingu) at (current page.south east) {\usebox\pinguB};
+        \node[gray,left=-.15cm,text width=5cm,scale=.65,align=right] at(pingu.west) {%
+            \scriptsize Wie könnte man die Routine \bjava{queenCanBePlacedHere(boolean[][], int, int)} umsetzen?%
+        };
+    }
+\end{tikzpicture}
+\begin{plainjava}
+!*\onslide<3->*!boolean nQueens(boolean[][] board, int row) {
+!*\onslide<4->*!    if(row == board.length) return true;
+!*\onslide<5->*!    for (int column = 0; column < board.length; column++) {
+!*\onslide<6->*!        if(!queenCanBePlacedHere(board, column, row)) continue;
+!*\onslide<7->*!        board[row][column] = true; // Try to place queen here
+!*\onslide<8->*!        if(nQueens(board, row + 1))
+!*\onslide<8->*!            return true;
+!*\onslide<9->*!        board[row][column] = false;
+!*\onslide<5->*!    }
+!*\onslide<10->*!    return false;
 !*\onslide<3->*!}
 \end{plainjava}
 \end{frame}
-\subsubsection{Towers of Hanoi}
-\begin{frame}
+% darüber setzen und einmal durch animieren?
 
-\end{frame}
-\subsubsection{Das N-Dame Problem}
-\begin{frame}
-
-\end{frame}
-\subsubsection{Sudoku Solver}
-\begin{frame}
-
-\end{frame}
 \section{Abschluss}
 % TODO: hinweisen auf Vorteil von tail rekursion
-\begin{frame}
+\begin{frame}{}
 \end{frame}
 
 % TODO: hilbert etc.
