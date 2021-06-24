@@ -1139,6 +1139,33 @@ boolean nQueens(boolean[][] board) \{^^J
 % darüber setzen und einmal durch animieren?
 
 \section{Abschluss}
+\savebox\pinguA{\tikz{\pingu[small, eye patch left, sign post left={\textbf{\ldots}}, hair=paletteA]}}
+\savebox\pinguB{\tikz{\pingu[eyes wink,small,left wing wave,sign post left={\textbf{\ldots}},devil horns=pingu@main]}}
+\savebox\pinguC{\tikz{\pingu[eyes shiny,small, left wing hug,straw hat,sign post left={\textbf{\ldots}},belly={\Large\textbf{\ldots}}]}}
+\SidebarCite{dive:tail-recursion}
+\begin{frame}[c]{Das obligatorische \say{Übrigens\ldots}}
+    \begin{itemize}[<+(1)->]
+        \itemsep10pt
+        \item Viele Varianten: \begin{itemize}
+            \itemsep3pt
+            \item Tail-Rekursionen
+            \item Primitiv-Rekursive Funktionen
+        \end{itemize}
+        \item Stack-Frames sind spannender und enthalten noch mehr!
+        \item Das riesige Thema des Compilerbaus liefert mehr
+        \begin{itemize}
+            \itemsep3pt
+            \item Optimierungen \& Transformationen
+            \item Recursive Descent Parser
+        \end{itemize}
+    \end{itemize}
+\begin{tikzpicture}[remember picture, overlay]
+    \onslide<9->{\node[scale=.6,above left=.5cm,yshift=.65cm,xshift=-7.65cm] (p1) at(current page.south east) {\usebox\pinguA};}
+    \onslide<10->{\node[scale=.6,above right] (p2) at(p1.south east) {\usebox\pinguB};}
+    \onslide<11->{\node[scale=.6,above right] (p3) at(p2.south east) {\usebox\pinguC};}
+\end{tikzpicture}
+\end{frame}
+\SidebarReset
 \newsavebox\javaStackBox \savebox\javaStackBox{%
 \begin{tikzpicture}
     \fill[lgray,rounded corners] (0,0) rectangle ++(3,5.5);
@@ -1231,33 +1258,6 @@ boolean nQueens(boolean[][] board) \{^^J
         \onslide<2->{\footnotesize Mathematisch} & \onslide<3->{\footnotesize Datenstrukturen} & \onslide<4->{\footnotesize Divide- \& Conquer}
     \end{tabular}}
 \end{center}
-\end{frame}
-
-\savebox\pinguA{\tikz{\pingu[small, eye patch left, sign post left={\textbf{\ldots}}, hair=paletteA]}}
-\savebox\pinguB{\tikz{\pingu[eyes wink,small,left wing wave,sign post left={\textbf{\ldots}},devil horns=pingu@main]}}
-\savebox\pinguC{\tikz{\pingu[eyes shiny,small, left wing hug,straw hat,sign post left={\textbf{\ldots}},belly={\Large\textbf{\ldots}}]}}
-\SidebarCite{}
-\begin{frame}[c]{Das obligatorische \say{übrigens\ldots}}
-    \begin{itemize}[<+(1)->]
-        \itemsep10pt
-        \item Viele Varianten: \begin{itemize}
-            \itemsep3pt
-            \item Tail-Rekursionen
-            \item Primitiv-Rekursive Funktionen
-        \end{itemize}
-        \item Stack-Frames sind spannender und enthalten noch mehr!
-        \item Das riesige Thema des Compilerbaus liefert mehr
-        \begin{itemize}
-            \itemsep3pt
-            \item Optimierungen \& Transformationen
-            \item Recursive Descent Parser
-        \end{itemize}
-    \end{itemize}
-\begin{tikzpicture}[remember picture, overlay]
-    \onslide<9->{\node[scale=.6,above left=.5cm,yshift=.65cm,xshift=-7.65cm] (p1) at(current page.south east) {\usebox\pinguA};}
-    \onslide<10->{\node[scale=.6,above right] (p2) at(p1.south east) {\usebox\pinguB};}
-    \onslide<11->{\node[scale=.6,above right] (p3) at(p2.south east) {\usebox\pinguC};}
-\end{tikzpicture}
 \end{frame}
 
 \end{document}

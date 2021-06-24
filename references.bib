@@ -1,124 +1,100 @@
-@misc{book:javase15-std,
-  publisher = {Oracle},
-  title     = {The Java\textregistered\ Virtual Machine Specification [Heap \& Stack]},
-  year      = {2020},
-  author    = {Lindholm, Tim and Yellin, Frank and Bracha, Gilad and Buckley, Alex and Smith, Daniel},
-  url       = {https://docs.oracle.com/javase/specs/jvms/se15/html/jvms-2.html#jvms-2.5.2}
-}
-
 @misc{book:javadoc-stack-frame,
   publisher = {Oracle},
   title     = {Java Debug Interface -- StackFrame (JDK 11)},
-  year      = {2021},
-  url       = {https://docs.oracle.com/en/java/javase/11/docs/api/jdk.jdi/com/sun/jdi/StackFrame.html}
+  url       = {https://docs.oracle.com/en/java/javase/11/docs/api/jdk.jdi/com/sun/jdi/StackFrame.html},
+  year      = {2021}
 }
 
-@misc{gh:tikzpingus,
-  author    = {Florian Sihler},
-  title     = {\LaTeX-Package, tikzpingus},
-  year      = {2021},
-  url       = {https://github.com/EagleoutIce/tikzpingus}
-}
-
-@article{dive:recursion,
-  title={About primitive recursive algorithms},
-  author={Colson, Lo{\"i}c},
-  journal={Theoretical Computer Science},
-  volume={83},
-  number={1},
-  pages={57--69},
-  year={1991},
-  publisher={Elsevier},
-  url={https://www.sciencedirect.com/science/article/pii/0304397591900395}
+@misc{book:javase15-std,
+  author    = {Lindholm, Tim and Yellin, Frank and Bracha, Gilad and Buckley, Alex and Smith, Daniel},
+  publisher = {Oracle},
+  title     = {The Java\textregistered\ Virtual Machine Specification [Heap \& Stack]},
+  url       = {https://docs.oracle.com/javase/specs/jvms/se15/html/jvms-2.html#jvms-2.5.2},
+  year      = {2020}
 }
 
 @article{dive:ackermann,
-  title={The Ackermann function. a theoretical, computational, and formula manipulative study},
-  author={Sundblad, Yngve},
-  journal={BIT Numerical Mathematics},
-  volume={11},
-  number={1},
-  pages={107--119},
-  year={1971},
-  publisher={Springer},
-  url={https://link.springer.com/content/pdf/10.1007/BF01935330.pdf}
-}
-
-@inproceedings{10.1145/328690.328700,
-author = {Liu, Yanhong A. and Stoller, Scott D.},
-title = {From Recursion to Iteration: What Are the Optimizations?},
-year = {1999},
-isbn = {1581132018},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-url = {https://doi.org/10.1145/328690.328700},
-doi = {10.1145/328690.328700},
-abstract = {Transforming recursion into iteration eliminates the use of stack frames during program execution. It has been studied extensively. This paper describes a powerful and systematic method, based on incrementalization, for transforming general recursion into iteration: identify an input increment, derive an incremental version under the input increment, and form an iterative computation using the incremental version. Exploiting incrementalization yields iterative computation in a uniform way and also allows additional optimizations to be explored cleanly and applied systematically, in most cases yielding iterative programs that use constant additional space, reducing additional space usage asymptotically, and run much faster. We summarize major optimizations, complexity improvements, and performance measurements.},
-booktitle = {Proceedings of the 2000 ACM SIGPLAN Workshop on Partial Evaluation and Semantics-Based Program Manipulation},
-pages = {73–82},
-numpages = {10},
-location = {Boston, Massachusetts, USA},
-series = {PEPM '00}
-}
-
-
-
-@article{dive:recursionvsit,
-author = {Liu, Yanhong A. and Stoller, Scott D.},
-title = {From Recursion to Iteration: What Are the Optimizations?},
-year = {1999},
-issue_date = {Nov. 1999},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-volume = {34},
-number = {11},
-issn = {0362-1340},
-url = {https://doi.org/10.1145/328691.328700},
-journal = {SIGPLAN Not.},
-month = nov,
-pages = {73–82},
-numpages = {10}
-}
-
-@article{10.1145/1269900.1268931,
-author = {Rubio-S\'{a}nchez, Manuel and Hern\'{a}n-Losada, Isidoro},
-title = {Exploring Recursion with Fibonacci Numbers},
-year = {2007},
-issue_date = {September 2007},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-volume = {39},
-number = {3},
-issn = {0097-8418},
-url = {https://doi.org/10.1145/1269900.1268931},
-doi = {10.1145/1269900.1268931},
-abstract = {This paper addresses the relationship between recursion and combinatorial problems, which may benefit teaching recursion in CS1/2 courses. Problems whose solutions are related to Fibonacci numbers are particularly interesting, since some can be decomposed by using different strategies, which may be based on the numerous Fibonacci identities or even on the concept of mutual recursion.},
-journal = {SIGCSE Bull.},
-month = jun,
-pages = {359},
-numpages = {1},
-keywords = {mutual recursion, combinatorics, recursion problems, fibonacci numbers}
+  author    = {Sundblad, Yngve},
+  journal   = {BIT Numerical Mathematics},
+  number    = {1},
+  pages     = {107--119},
+  publisher = {Springer},
+  title     = {The Ackermann function. a theoretical, computational, and formula manipulative study},
+  url       = {https://link.springer.com/content/pdf/10.1007/BF01935330.pdf},
+  volume    = {11},
+  year      = {1971}
 }
 
 @inproceedings{dive:fibonacci,
-author = {Rubio-S\'{a}nchez, Manuel and Hern\'{a}n-Losada, Isidoro},
-title = {Exploring Recursion with Fibonacci Numbers},
-year = {2007},
-isbn = {9781595936103},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-url = {https://doi.org/10.1145/1268784.1268931},
-booktitle = {Proceedings of the 12\textsuperscript{th} Annual SIGCSE Conference on Innovation and Technology in Computer Science Education},
-pages = {359},
-numpages = {1},
-keywords = {fibonacci numbers, mutual recursion, recursion problems, combinatorics},
-location = {Dundee, Scotland},
-series = {ITiCSE '07}
+  address   = {New York, NY, USA},
+  author    = {Rubio-S\'{a}nchez, Manuel and Hern\'{a}n-Losada, Isidoro},
+  booktitle = {Proceedings of the 12\textsuperscript{th} Annual SIGCSE Conference on Innovation and Technology in Computer Science Education},
+  isbn      = {9781595936103},
+  keywords  = {fibonacci numbers, mutual recursion, recursion problems, combinatorics},
+  location  = {Dundee, Scotland},
+  numpages  = {1},
+  pages     = {359},
+  publisher = {Association for Computing Machinery},
+  series    = {ITiCSE '07},
+  title     = {Exploring Recursion with Fibonacci Numbers},
+  url       = {https://doi.org/10.1145/1268784.1268931},
+  year      = {2007}
 }
 
 @misc{dive:java-generics,
   publisher = {Oracle},
   title     = {Lesson: Generics},
-  year      = {2021},
-  url       = {https://docs.oracle.com/javase/tutorial/java/generics/}
+  url       = {https://docs.oracle.com/javase/tutorial/java/generics/},
+  year      = {2021}
+}
+
+@article{dive:recursion,
+  author    = {Colson, Lo{\"i}c},
+  journal   = {Theoretical Computer Science},
+  number    = {1},
+  pages     = {57--69},
+  publisher = {Elsevier},
+  title     = {About primitive recursive algorithms},
+  url       = {https://www.sciencedirect.com/science/article/pii/0304397591900395},
+  volume    = {83},
+  year      = {1991}
+}
+
+@article{dive:recursionvsit,
+  address    = {New York, NY, USA},
+  author     = {Liu, Yanhong A. and Stoller, Scott D.},
+  issn       = {0362-1340},
+  issue_date = {Nov. 1999},
+  journal    = {SIGPLAN Not.},
+  month      = nov,
+  number     = {11},
+  numpages   = {10},
+  pages      = {73–82},
+  publisher  = {Association for Computing Machinery},
+  title      = {From Recursion to Iteration: What Are the Optimizations?},
+  url        = {https://doi.org/10.1145/328691.328700},
+  volume     = {34},
+  year       = {1999}
+}
+
+@inproceedings{dive:tail-recursion,
+  address   = {New York, NY, USA},
+  author    = {Clinger, William D.},
+  booktitle = {Proceedings of the ACM SIGPLAN 1998 Conference on Programming Language Design and Implementation},
+  isbn      = {0897919874},
+  location  = {Montreal, Quebec, Canada},
+  numpages  = {12},
+  pages     = {174--185},
+  publisher = {Association for Computing Machinery},
+  series    = {PLDI '98},
+  title     = {Proper Tail Recursion and Space Efficiency},
+  url       = {https://doi.org/10.1145/277650.277719},
+  year      = {1998}
+}
+
+@misc{gh:tikzpingus,
+  author = {Florian Sihler},
+  title  = {\LaTeX-Package, tikzpingus},
+  url    = {https://github.com/EagleoutIce/tikzpingus},
+  year   = {2021}
 }
