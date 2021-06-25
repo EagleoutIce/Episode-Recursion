@@ -6,4 +6,4 @@ Slides for a minor presentation on recursion in Java :)
 * Animated Version ([here](https://media.githubusercontent.com/media/EagleoutIce/Episode-Recursion/gh-pages/rekursion.pdf) or [here](https://github.com/EagleoutIce/Episode-Recursion/blob/gh-pages/rekursion.pdf))
 * Not-Animated Version (with enough extra slides to follow the original animations: [here](https://media.githubusercontent.com/media/EagleoutIce/Episode-Recursion/gh-pages/noanim_rekursion.pdf) or [here](https://github.com/EagleoutIce/Episode-Recursion/blob/gh-pages/noanim_rekursion.pdf))
 
-[<img src="https://github.com/EagleoutIce/Episode-Recursion/blob/gh-pages/preview-01.png?raw=true" width="650"/>](https://media.githubusercontent.com/media/EagleoutIce/Episode-Recursion/gh-pages/noanim_recursion.pdf)
+[<img src="https://github.com/EagleoutIce/Episode-Recursion/blob/gh-pages/preview-01.png?raw=true" width="650"/>](https://media.githubusercontent.com/media/EagleoutIce/Episode-Recursion/gh-pages/noanim_rekursion.pdf)
