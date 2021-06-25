@@ -951,7 +951,7 @@ class Element {
     }
 \end{tikzpicture}}\medskip
 \end{center}
-        \item<17-> Das N-Dame Problem
+        \item<17-> Das N-Damen Problem
 \begin{center}
 \resizebox{.55\linewidth}!{\begin{tikzpicture}[lgray,rounded corners=1pt]
     \onslide<18-|handout:1>{
@@ -1061,7 +1061,7 @@ enum Pole \{^^J
 \end{plainjava}
 \end{frame}
 
-\subsubsection{Das N-Dame Problem}
+\subsubsection{Das N-Damen Problem}
 \savebox\pinguA{%
 \begin{minipage}{7.35cm}
 \begin{plainjava}^^J
@@ -1073,7 +1073,7 @@ boolean nQueens(boolean[][] board) \{^^J
 }
 \savebox\pinguB{\tikz{\pingu[right eye wink,sign post right={\textbf{Task}}, sign post right color=paletteA,right wing wave,left wing grab,medal=paletteA,medal text=!]}}%
 \savebox\pinguC{\tikz{\pingu[wings shock,princess crown,eyes shiny,small,belly=\Large\faHeart,princess crown gem colors={paletteA}{paletteB}{paletteC}{paletteB}{paletteA}]}}%
-\begin{frame}[fragile]{Das N-Dame Problem}\lstfs{8}
+\begin{frame}[fragile]{Das N-Damen Problem}\lstfs{8}
 \begin{tikzpicture}[overlay,remember picture]
     \onslide<2->{\node[below left=.33cm,fill=lgray!30!white,rounded corners=2pt,scale=.65] at (current page.north east) {\usebox\pinguA};}
     \onslide<11->{
