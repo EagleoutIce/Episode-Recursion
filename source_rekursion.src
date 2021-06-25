@@ -64,7 +64,7 @@ class Mega {
     }
     \onslide<3->{
         \node[lrel] (mg) at (1.5,5-.85) {\bjava[morekeywords={[3]{Mega}}]{Mega mon =\ }\raisebox{-1pt}{\faGenderless}};
-        \node[lrel2] (mt) at (5,4-.85) {\bjava{int i = 0}\\[1mm]\only<3-4|handout:0>{\resizebox{25.4mm}!{\bjava{String s = null}}}\only<5->{\bjava{String =\ }\raisebox{-1pt}{\faGenderless}}};
+        \node[lrel2] (mt) at (5,4-.85) {\bjava{int i = 0}\\[1mm]\only<3-4|handout:0>{\resizebox{25.4mm}!{\bjava{String s = null}}}\only<5->{\bjava{String s =\ }\raisebox{-1pt}{\faGenderless}}};
         \draw[lightgray,very thick,-Kite]  (mg.east) to[out=0,in=180] (mt.west);
     }
     \onslide<5->{
