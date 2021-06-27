@@ -283,7 +283,7 @@ class Mega {
 
 \section{Theoretisches}
 \subsection{Der Grundriss einer Rekursion}
-\savebox\pinguA{\tikz{\pingu[eyes wink, wings wave, eye patch left, eye patch right,belly=\Large\faStar,lightsaber left=paletteB!81!white,lightsaber left outer glow factor=.0615,lightsaber left angle=42,pants=pingu@bronze,pants bands]}}%
+\savebox\pinguA{\tikz{\pingu[eyes wink, wings wave, eye patch left, eye patch right,belly=\Large\faStar,lightsaber left=paletteB!81!white,lightsaber left outer glow factor=.0615,left item angle=42,pants=pingu@bronze,pants bands]}}%
 \begin{frame}{Anatomie einer Rekursion}
 \begin{columns}[c]
 \begin{column}{.6\linewidth}\linespread{1.5}\scriptsize%
@@ -1158,11 +1158,12 @@ boolean nQueens(boolean[][] board) \{^^J
             \item Optimierungen \& Transformationen
             \item Recursive Descent Parser
         \end{itemize}
+        \item \parbox[t]{5.05cm}{Dynamische Programmierung!}
     \end{itemize}
 \begin{tikzpicture}[remember picture, overlay]
-    \onslide<9->{\node[scale=.6,above left=.5cm,yshift=.85cm,xshift=-7.65cm] (p1) at(current page.south east) {\usebox\pinguA};}
-    \onslide<10->{\node[scale=.6,above right] (p2) at(p1.south east) {\usebox\pinguB};}
-    \onslide<11->{\node[scale=.6,above right] (p3) at(p2.south east) {\usebox\pinguC};}
+    \onslide<10->{\node[scale=.6,above left=.5cm,yshift=1.25cm,xshift=-7.65cm] (p1) at(current page.south east) {\usebox\pinguA};}
+    \onslide<11->{\node[scale=.6,above right] (p2) at(p1.south east) {\usebox\pinguB};}
+    \onslide<12->{\node[scale=.6,above right] (p3) at(p2.south east) {\usebox\pinguC};}
 \end{tikzpicture}
 \end{frame}
 \SidebarReset
