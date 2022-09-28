@@ -1258,5 +1258,4 @@ boolean nQueens(boolean[][] board) \{^^J
     \end{tabular}}
 \end{center}
 \end{frame}
-
 \end{document}
