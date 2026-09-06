@@ -1,41 +1,47 @@
 name: generate-slides
-'on':
+
+"on":
   push:
-    branches:
-    - master
-    - main
+    branches: [master, main]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout git repository
-      uses: actions/checkout@v2
-      with:
-        lfs: true
-        submodules: true
-    - name: Setup Python environment for sltx
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'
-    - name: Setup and run sltx-install (and pu)
-      run: |
-        sudo apt install poppler-utils
-        pip install sltx
-        echo "tx-default" | sltx docker
-    - name: Compile the Documents
-      run: |
-        sltx -t2 compile --root --profile "tx-default" "noanim_rekursion.tex" "rekursion.tex"
-        pdftoppm -png -f 1 -l 1 ./noanim_rekursion.pdf preview
-    - name: Commit
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add -f "noanim_rekursion.pdf" "rekursion.pdf" "preview-01.png"
-        git commit -m "Newly compiled data"
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        branch: gh-pages
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        force: true
+      - name: Checkout git repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          submodules: 'recursive'
+
+      - name: Get poppler-utils for the preview
+        run: sudo apt-get install -y poppler-utils
+
+      - name: Compile the documents
+        uses: xu-cheng/latex-action@v3
+        with:
+          # the local submodules in ./lib have to win over the TeX Live copies
+          # ./lib already wins via TEXINPUTS; this only keeps the TeX Live
+          # copies out of the way (|| true: they may be absent in the image)
+          pre_compile: "tlmgr remove --force tikzpingus fancyqr || true"
+          root_file: |
+            noanim_rekursion.tex
+            rekursion.tex
+
+      - name: Generate the preview
+        run: pdftoppm -png -f 1 -l 1 ./noanim_rekursion.pdf preview
+
+      - name: Commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -f "noanim_rekursion.pdf" "rekursion.pdf" "preview-01.png"
+          git commit -m "Newly compiled data"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
