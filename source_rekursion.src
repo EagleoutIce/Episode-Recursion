@@ -25,12 +25,12 @@
     \onslide<4->{\node[lrel] at (1.5,5-.85) {\bjava{int x = 0}};}
     \onslide<5->{\node[lrel] at (1.5,5-.85*2) {\bjava{byte y = 12}};}
     \onslide<6->{
-        \node[lrel] (fg) at (1.5,5-.85*3) {\bjava{String f =\ }\raisebox{-1pt}\faGenderless};
+        \node[lrel] (fg) at (1.5,5-.85*3) {\resizebox{25.4mm}!{\bjava{String f =\ }\raisebox{-1pt}\faGenderless}};
         \node[lrel] (ft) at (5,5-.85*3) {\bjava{\"Hi World\"}};
         \draw[lightgray,very thick,-Kite]  (fg.east) -- (ft.west);
     }
     \onslide<7->{
-        \node[lrel] (cg) at (1.5,5-.85*4) {\bjava{char[] c =\ }\raisebox{-1pt}\faGenderless};
+        \node[lrel] (cg) at (1.5,5-.85*4) {\resizebox{25.4mm}!{\bjava{char[] c =\ }\raisebox{-1pt}\faGenderless}};
         \node[lrel] (ct) at (5,5-.85*4) {\bjava{\{2, 3, 4\}}};
         \draw[lightgray,very thick,-Kite]  (cg.east) -- (ct.west);
     }
@@ -63,7 +63,7 @@ class Mega {
     \node[lrel] at (5,5) {\ldots};
     }
     \onslide<3->{
-        \node[lrel] (mg) at (1.5,5-.85) {\bjava[morekeywords={[3]{Mega}}]{Mega mon =\ }\raisebox{-1pt}{\faGenderless}};
+        \node[lrel] (mg) at (1.5,5-.85) {\resizebox{25.4mm}!{\bjava[morekeywords={[3]{Mega}}]{Mega mon =\ }\raisebox{-1pt}{\faGenderless}}};
         \node[lrel2] (mt) at (5,4-.85) {\bjava{int i = 0}\\[1mm]\only<3-4|handout:0>{\resizebox{25.4mm}!{\bjava{String s = null}}}\only<5->{\bjava{String s =\ }\raisebox{-1pt}{\faGenderless}}};
         \draw[lightgray,very thick,-Kite]  (mg.east) to[out=0,in=180] (mt.west);
     }
@@ -208,7 +208,7 @@ class Mega {
     \draw[ultra thick,lgray] (s.text split west) -- (s.text split east);
     }
     \onslide<8-9|handout:3>{%
-        \node[lrel,below=1mm] (br) at (d.south) {\bjava{<ret-b> =\ }\raisebox{-1pt}\faGenderless};
+        \node[lrel,below=1mm] (br) at (d.south) {\resizebox{25.4mm}!{\bjava{<ret-b> =\ }\raisebox{-1pt}\faGenderless}};
         \node[lrel,below=8mm] (br2) at (d2.south) {\bjava{\"6\"}};
         \draw[lightgray,very thick,-Kite]  (br.east) to[out=0,in=180] (br2.west);
     }
@@ -1177,10 +1177,10 @@ boolean nQueens(boolean[][] board) \{^^J
     \node[lrel] at (5,5) {\ldots};
     \node[lrel] at (1.5,5-.85) {\bjava{int x = 0}};
     \node[lrel] at (1.5,5-.85*2) {\bjava{byte y = 12}};
-    \node[lrel] (fg) at (1.5,5-.85*3) {\bjava{String f =\ }\raisebox{-1pt}\faGenderless};
+    \node[lrel] (fg) at (1.5,5-.85*3) {\resizebox{25.4mm}!{\bjava{String f =\ }\raisebox{-1pt}\faGenderless}};
     \node[lrel] (ft) at (5,5-.85*3) {\bjava{\"Hi World\"}};
     \draw[lightgray,very thick,-Kite]  (fg.east) -- (ft.west);
-    \node[lrel] (cg) at (1.5,5-.85*4) {\bjava{char[] c =\ }\raisebox{-1pt}\faGenderless};
+    \node[lrel] (cg) at (1.5,5-.85*4) {\resizebox{25.4mm}!{\bjava{char[] c =\ }\raisebox{-1pt}\faGenderless}};
     \node[lrel] (ct) at (5,5-.85*4) {\bjava{\{2, 3, 4\}}};
     \draw[lightgray,very thick,-Kite]  (cg.east) -- (ct.west);
 \end{tikzpicture}
